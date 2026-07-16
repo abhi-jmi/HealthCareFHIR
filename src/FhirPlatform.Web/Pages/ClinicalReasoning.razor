@@ -1,0 +1,17 @@
+@page "/clinical-reasoning"
+@using FhirPlatform.Application.Contracts
+@inject IHttpClientFactory HttpClientFactory
+<h1>Clinical Reasoning</h1>
+<div class="alert alert-warning">Demonstration only. This module is not medical advice. It executes only explicitly configured deterministic rules and does not use generative AI for clinical decisions.</div>
+<button class="btn btn-secondary" @onclick="LoadAsync">Load rules</button>
+@if (_rules is not null) { <table class="table"><thead><tr><th>Rule</th><th>Version</th><th>Name</th><th>Active</th></tr></thead><tbody>@foreach (var r in _rules) { <tr><td>@r.RuleId</td><td>@r.Version</td><td>@r.DisplayName</td><td>@r.Active</td></tr> }</tbody></table> }
+<h2 class="h4">Execute HbA1c review rule</h2>
+<label class="form-label">Patient reference</label><input class="form-control" @bind="_patientReference" placeholder="Patient/example" />
+<label class="form-label">Rule id</label><input class="form-control" @bind="_ruleId" />
+<button class="btn btn-primary mt-2" @onclick="ExecuteAsync">Execute</button>
+@if (_execution is not null) { <div class="alert alert-info mt-3">Execution @_execution.ExecutionId: @_execution.Result; outputs @string.Join(", ", _execution.OutputResourceIds)</div> }
+@code {
+    private IReadOnlyList<RuleConfigurationDto>? _rules; private string _patientReference = "Patient/example"; private string _ruleId = "hba1c-review"; private RuleExecutionResultDto? _execution;
+    private async Task LoadAsync() => _rules = await HttpClientFactory.CreateClient("Api").GetFromJsonAsync<IReadOnlyList<RuleConfigurationDto>>("api/clinical-reasoning/rules");
+    private async Task ExecuteAsync() => _execution = await (await HttpClientFactory.CreateClient("Api").PostAsJsonAsync("api/clinical-reasoning/execute", new ExecuteRuleRequest(_patientReference, _ruleId))).Content.ReadFromJsonAsync<RuleExecutionResultDto>();
+}
