@@ -1,0 +1,10 @@
+@using Hl7.Fhir.Model
+@if (ContactPoint is null)
+{
+    <span class="text-muted">No contact</span>
+}
+else
+{
+    <span><span class="badge text-bg-light">@ContactPoint.System</span> @ContactPoint.Value</span>
+}
+@code { [Parameter] public ContactPoint? ContactPoint { get; set; } }

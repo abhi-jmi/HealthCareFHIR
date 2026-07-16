@@ -26,3 +26,8 @@ Development passwords in `docker-compose.yml` are local-only defaults and must b
 - `PUT /api/patients/{id}` updates a Patient through FHIR REST.
 - `GET /api/conformance/dashboard` reads the FHIR server CapabilityStatement.
 - `POST /api/fhir/validation` validates FHIR JSON or XML and returns an OperationOutcome projection.
+
+## Level 1 UI routes
+
+- `/validation` validates pasted FHIR JSON/XML through `POST /api/fhir/validation`, displays OperationOutcome issues, and exposes formatted JSON/XML download links.
+- `/administration/extensions` manages the custom extension registry used to reject unknown custom extensions during validation and business workflows.

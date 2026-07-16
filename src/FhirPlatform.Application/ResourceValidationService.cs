@@ -10,7 +10,7 @@ public interface IResourceValidationService
     Task<FhirValidationResponse> ValidateAsync(FhirValidationRequest request, CancellationToken cancellationToken);
 }
 
-public sealed class ResourceValidationService(IFhirResourceClient fhirClient) : IResourceValidationService
+public sealed class ResourceValidationService(IFhirResourceClient fhirClient, IExtensionRegistryReader extensionRegistry) : IResourceValidationService
 {
     private readonly FhirJsonParser _jsonParser = new();
     private readonly FhirXmlParser _xmlParser = new();
@@ -22,9 +22,16 @@ public sealed class ResourceValidationService(IFhirResourceClient fhirClient) : 
         var resource = Parse(request);
         var errors = new List<string>();
         var warnings = new List<string>();
+        var unknownExtensions = await FindUnknownExtensionsAsync(resource, cancellationToken);
+
         if (!string.Equals(resource.TypeName, request.ExpectedResourceType, StringComparison.OrdinalIgnoreCase))
         {
             errors.Add($"Expected {request.ExpectedResourceType} but parsed {resource.TypeName}.");
+        }
+
+        foreach (var extensionUrl in unknownExtensions)
+        {
+            errors.Add($"Unknown custom extension '{extensionUrl}' is not registered for {resource.TypeName}.");
         }
 
         var outcome = errors.Count == 0 ? await fhirClient.ValidateAsync(resource, cancellationToken) : CreateLocalOutcome(errors);
@@ -42,12 +49,33 @@ public sealed class ResourceValidationService(IFhirResourceClient fhirClient) : 
             _xmlSerializer.SerializeToString(resource),
             _jsonSerializer.SerializeToString(outcome),
             errors.Distinct(StringComparer.OrdinalIgnoreCase).ToArray(),
-            warnings.Distinct(StringComparer.OrdinalIgnoreCase).ToArray());
+            warnings.Distinct(StringComparer.OrdinalIgnoreCase).ToArray(),
+            unknownExtensions);
     }
 
     private Resource Parse(FhirValidationRequest request) => request.Format.Equals("xml", StringComparison.OrdinalIgnoreCase)
         ? _xmlParser.Parse<Resource>(request.Payload)
         : _jsonParser.Parse<Resource>(request.Payload);
+
+    private async Task<IReadOnlyList<string>> FindUnknownExtensionsAsync(Resource resource, CancellationToken cancellationToken)
+    {
+        IEnumerable<Extension> resourceExtensions = resource is DomainResource domainResource
+            ? domainResource.Extension
+            : Enumerable.Empty<Extension>();
+
+        if (!resourceExtensions.Any()) return Array.Empty<string>();
+
+        var registeredUrls = await extensionRegistry.GetActiveCanonicalUrlsAsync(resource.TypeName, cancellationToken);
+        return resourceExtensions
+            .Select(extension => extension.Url)
+            .Where(url => !string.IsNullOrWhiteSpace(url) && IsCustomExtension(url!) && !registeredUrls.Contains(url!))
+            .Distinct(StringComparer.OrdinalIgnoreCase)
+            .ToArray()!;
+    }
+
+    private static bool IsCustomExtension(string url) =>
+        !url.StartsWith("http://hl7.org/fhir/StructureDefinition/", StringComparison.OrdinalIgnoreCase) &&
+        !url.StartsWith("https://hl7.org/fhir/StructureDefinition/", StringComparison.OrdinalIgnoreCase);
 
     private static OperationOutcome CreateLocalOutcome(IEnumerable<string> errors)
     {

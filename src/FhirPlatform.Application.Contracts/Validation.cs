@@ -9,4 +9,5 @@ public sealed record FhirValidationResponse(
     string NormalizedXml,
     string OperationOutcomeJson,
     IReadOnlyList<string> Errors,
-    IReadOnlyList<string> Warnings);
+    IReadOnlyList<string> Warnings,
+    IReadOnlyList<string> UnknownExtensions);

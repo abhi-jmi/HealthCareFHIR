@@ -1,11 +1,88 @@
 @page "/validation"
+@using System.Net.Http.Json
+@using FhirPlatform.Application.Contracts
 @using FhirPlatform.Web.Components
+@inject IHttpClientFactory HttpClientFactory
 
 <h2>FHIR Resource Validation</h2>
 <p class="text-muted">Administrators can validate FHIR JSON or XML through the custom API and inspect the returned OperationOutcome.</p>
-<label class="form-label" for="resource-type">Expected resource type</label><input id="resource-type" class="form-control" value="Patient" />
-<label class="form-label mt-3" for="format">Format</label><select id="format" class="form-select"><option>json</option><option>xml</option></select>
-<label class="form-label mt-3" for="payload">FHIR JSON or XML</label><textarea id="payload" class="form-control" rows="12"></textarea>
-<button class="btn btn-primary mt-3">Validate</button>
-<OperationOutcomePanel Issues="Array.Empty<string>()" />
-<RawResourceViewer Title="Formatted resource" Format="FHIR JSON" Content="Paste a resource and validate it to view formatted output." />
+
+<div class="row g-3">
+    <div class="col-md-6">
+        <label class="form-label" for="resource-type">Expected resource type</label>
+        <input id="resource-type" class="form-control" @bind="_resourceType" />
+    </div>
+    <div class="col-md-6">
+        <label class="form-label" for="format">Format</label>
+        <select id="format" class="form-select" @bind="_format"><option value="json">FHIR JSON</option><option value="xml">FHIR XML</option></select>
+    </div>
+    <div class="col-12">
+        <label class="form-label" for="payload">FHIR JSON or XML</label>
+        <textarea id="payload" class="form-control font-monospace" rows="14" @bind="_payload"></textarea>
+    </div>
+</div>
+
+<button class="btn btn-primary mt-3" disabled="@_isBusy" @onclick="ValidateAsync">@(_isBusy ? "Validating..." : "Validate")</button>
+
+@if (_error is not null)
+{
+    <div class="alert alert-danger mt-3" role="alert">@_error</div>
+}
+
+@if (_response is not null)
+{
+    <div class="mt-4">
+        <span class="badge @(_response.IsValid ? "text-bg-success" : "text-bg-danger")">@(_response.IsValid ? "Valid" : "Invalid")</span>
+        @foreach (var extension in _response.UnknownExtensions)
+        {
+            <span class="badge text-bg-warning ms-2">Unknown extension: @extension</span>
+        }
+    </div>
+    <OperationOutcomePanel Issues="_response.Errors.Concat(_response.Warnings).ToArray()" />
+    <div class="btn-group my-3" role="group" aria-label="Download formatted resource">
+        <a class="btn btn-outline-secondary" download="resource.json" href="@DownloadHref(_response.NormalizedJson, "application/fhir+json")">Download JSON</a>
+        <a class="btn btn-outline-secondary" download="resource.xml" href="@DownloadHref(_response.NormalizedXml, "application/fhir+xml")">Download XML</a>
+        <button class="btn btn-outline-secondary" @onclick="() => _showXml = false">Show JSON</button>
+        <button class="btn btn-outline-secondary" @onclick="() => _showXml = true">Show XML</button>
+    </div>
+    <RawResourceViewer Title="Formatted resource" Format="@(_showXml ? "FHIR XML" : "FHIR JSON")" Content="@(_showXml ? _response.NormalizedXml : _response.NormalizedJson)" />
+    <RawResourceViewer Title="OperationOutcome" Format="FHIR JSON" Content="@_response.OperationOutcomeJson" />
+}
+
+@code {
+    private string _resourceType = "Patient";
+    private string _format = "json";
+    private string _payload = "";
+    private bool _isBusy;
+    private bool _showXml;
+    private string? _error;
+    private FhirValidationResponse? _response;
+
+    private async Task ValidateAsync()
+    {
+        _isBusy = true;
+        _error = null;
+        _response = null;
+        try
+        {
+            var client = HttpClientFactory.CreateClient("Api");
+            var response = await client.PostAsJsonAsync("api/fhir/validation", new FhirValidationRequest(_payload, _resourceType, _format));
+            if (!response.IsSuccessStatusCode)
+            {
+                _error = $"Validation request failed with HTTP {(int)response.StatusCode}.";
+                return;
+            }
+            _response = await response.Content.ReadFromJsonAsync<FhirValidationResponse>();
+        }
+        catch (Exception ex)
+        {
+            _error = ex.Message;
+        }
+        finally
+        {
+            _isBusy = false;
+        }
+    }
+
+    private static string DownloadHref(string content, string mediaType) => $"data:{mediaType};charset=utf-8,{Uri.EscapeDataString(content)}";
+}

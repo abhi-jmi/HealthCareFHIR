@@ -19,6 +19,8 @@ builder.Services.AddHttpClient<IFhirResourceClient, MicrosoftFhirResourceClient>
 builder.Services.AddScoped<IPatientService, PatientService>();
 builder.Services.AddScoped<IConformanceService, ConformanceService>();
 builder.Services.AddScoped<IResourceValidationService, ResourceValidationService>();
+builder.Services.AddScoped<IExtensionRegistryService, ExtensionRegistryService>();
+builder.Services.AddScoped<IExtensionRegistryReader>(sp => sp.GetRequiredService<IExtensionRegistryService>());
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options => { builder.Configuration.GetSection("Authentication:JwtBearer").Bind(options); options.RequireHttpsMetadata = builder.Configuration.GetValue("Authentication:RequireHttpsMetadata", false); });
 builder.Services.AddAuthorization(options =>
 {
