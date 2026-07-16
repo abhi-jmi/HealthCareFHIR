@@ -21,10 +21,10 @@ else
     [Parameter] public IReadOnlyCollection<Extension> Extensions { get; set; } = Array.Empty<Extension>();
     private static string ValueText(Extension extension) => extension.Value switch
     {
-        FhirString value => value.Value,
+        FhirString value => value.Value ?? string.Empty,
         FhirBoolean value => value.Value?.ToString() ?? string.Empty,
         FhirDecimal value => value.Value?.ToString() ?? string.Empty,
-        FhirDateTime value => value.Value,
+        FhirDateTime value => value.Value ?? string.Empty,
         CodeableConcept value => value.Text ?? value.Coding.FirstOrDefault()?.Display ?? string.Empty,
         Coding value => value.Display ?? value.Code ?? string.Empty,
         Quantity value => $"{value.Value} {value.Unit ?? value.Code}",

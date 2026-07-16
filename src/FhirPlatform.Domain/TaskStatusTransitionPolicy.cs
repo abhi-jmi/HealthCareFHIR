@@ -12,6 +12,7 @@ public sealed class TaskStatusTransitionPolicy
         ["on-hold"] = ["in-progress", "cancelled"],
     };
 
+    /// <summary>Returns true when a FHIR Task can move from the current status to the requested status.</summary>
     public bool CanTransition(string currentStatus, string requestedStatus) =>
         Allowed.TryGetValue(currentStatus, out var targets) && targets.Contains(requestedStatus, StringComparer.OrdinalIgnoreCase);
 }

@@ -1,0 +1,63 @@
+# Build outputs
+bin/
+obj/
+artifacts/
+TestResults/
+coverage/
+*.coverage
+*.coveragexml
+coverage.cobertura.xml
+
+# User and IDE state
+.vs/
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Rider / JetBrains
+.idea/
+
+# Visual Studio Code / OmniSharp
+.omnisharp/
+
+# Logs and diagnostics
+*.log
+logs/
+*.dmp
+*.trace
+
+# Local configuration and secrets
+appsettings.Development.local.json
+appsettings.Local.json
+*.local.json
+*.secrets.json
+.env
+.env.*
+!.env.example
+
+# Docker and compose local overrides
+docker-compose.override.yml
+
+# Azure / deployment local state
+.azure/
+.azd/
+deploy/**/*.parameters.local.json
+
+# Generated packages and caches
+*.nupkg
+*.snupkg
+packages/
+.nuget/
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# OS files
+.DS_Store
+Thumbs.db
