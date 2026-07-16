@@ -1,0 +1,10 @@
+@using Hl7.Fhir.Model
+@if (Quantity is null)
+{
+    <span class="text-muted">No quantity</span>
+}
+else
+{
+    <span><strong>@Quantity.Value</strong> @(Quantity.Unit ?? Quantity.Code) <small class="text-muted">@Quantity.System</small></span>
+}
+@code { [Parameter] public Quantity? Quantity { get; set; } }

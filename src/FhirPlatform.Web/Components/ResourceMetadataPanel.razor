@@ -1,0 +1,13 @@
+<div class="small text-muted">
+    <dl class="row">
+        <dt class="col-sm-3">Resource ID</dt><dd class="col-sm-9">@ResourceId</dd>
+        <dt class="col-sm-3">Version</dt><dd class="col-sm-9">@VersionId</dd>
+        <dt class="col-sm-3">Last updated</dt><dd class="col-sm-9">@LastUpdated</dd>
+    </dl>
+</div>
+
+@code {
+    [Parameter] public string? ResourceId { get; set; }
+    [Parameter] public string? VersionId { get; set; }
+    [Parameter] public string? LastUpdated { get; set; }
+}

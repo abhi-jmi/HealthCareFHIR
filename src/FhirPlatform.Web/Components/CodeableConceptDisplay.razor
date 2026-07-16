@@ -1,0 +1,14 @@
+@using Hl7.Fhir.Model
+@if (Concept is null)
+{
+    <span class="text-muted">No concept</span>
+}
+else
+{
+    <span>@(Concept.Text ?? Concept.Coding.FirstOrDefault()?.Display ?? Concept.Coding.FirstOrDefault()?.Code)</span>
+    @foreach (var coding in Concept.Coding)
+    {
+        <CodingDisplay Coding="coding" />
+    }
+}
+@code { [Parameter] public CodeableConcept? Concept { get; set; } }

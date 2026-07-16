@@ -1,0 +1,1 @@
+{"resourceType":"Bundle","type":"transaction","entry":[{"resource":{"resourceType":"Patient","id":"patient-001","active":true,"name":[{"family":"Rivera","given":["Alex"]}],"gender":"female","birthDate":"1985-04-12"},"request":{"method":"PUT","url":"Patient/patient-001"}}]}

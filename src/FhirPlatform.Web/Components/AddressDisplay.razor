@@ -1,0 +1,13 @@
+@using Hl7.Fhir.Model
+@if (Address is null)
+{
+    <span class="text-muted">No address</span>
+}
+else
+{
+    <address class="mb-0">@Format(Address)</address>
+}
+@code {
+    [Parameter] public Address? Address { get; set; }
+    private static string Format(Address address) => string.Join(", ", address.Line.Concat(new[] { address.City, address.State, address.PostalCode, address.Country }).Where(p => !string.IsNullOrWhiteSpace(p)));
+}
