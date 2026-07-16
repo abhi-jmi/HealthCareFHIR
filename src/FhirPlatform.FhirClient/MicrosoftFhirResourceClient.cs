@@ -32,8 +32,14 @@ public sealed class MicrosoftFhirResourceClient(HttpClient httpClient, ILogger<M
     public async Task<T> CreateAsync<T>(T resource, CancellationToken cancellationToken) where T : Resource, new() =>
         (await SendAsync<T>(HttpMethod.Post, resource.TypeName, resource, cancellationToken))!;
 
+    public async Task<Resource> CreateRawAsync(Resource resource, CancellationToken cancellationToken) =>
+        (await SendAsync<Resource>(HttpMethod.Post, resource.TypeName, resource, cancellationToken))!;
+
     public async Task<T> UpdateAsync<T>(string id, T resource, CancellationToken cancellationToken) where T : Resource, new() =>
         (await SendAsync<T>(HttpMethod.Put, $"{resource.TypeName}/{Uri.EscapeDataString(id)}", resource, cancellationToken))!;
+
+    public async Task<Resource> UpdateRawAsync(string resourceType, string id, Resource resource, CancellationToken cancellationToken) =>
+        (await SendAsync<Resource>(HttpMethod.Put, $"{resourceType}/{Uri.EscapeDataString(id)}", resource, cancellationToken))!;
 
     public async Task<Resource> PatchAsync(string resourceType, string id, Parameters patch, CancellationToken cancellationToken) =>
         (await SendAsync<Resource>(HttpMethod.Patch, $"{resourceType}/{Uri.EscapeDataString(id)}", patch, cancellationToken))!;

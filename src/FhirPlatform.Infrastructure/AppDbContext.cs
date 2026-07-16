@@ -8,6 +8,8 @@ public sealed class AppDbContext(DbContextOptions<AppDbContext> options) : DbCon
     public DbSet<SavedApiRequest> SavedApiRequests => Set<SavedApiRequest>();
     public DbSet<OperationalAuditCorrelation> OperationalAuditCorrelations => Set<OperationalAuditCorrelation>();
     public DbSet<IngestionJob> IngestionJobs => Set<IngestionJob>();
+    public DbSet<RuleConfiguration> RuleConfigurations => Set<RuleConfiguration>();
+    public DbSet<RuleExecutionAudit> RuleExecutionAudits => Set<RuleExecutionAudit>();
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -15,6 +17,7 @@ public sealed class AppDbContext(DbContextOptions<AppDbContext> options) : DbCon
         modelBuilder.Entity<SavedApiRequest>().Property(x => x.CreatedAt).HasDefaultValueSql("SYSUTCDATETIME()");
         modelBuilder.Entity<OperationalAuditCorrelation>().HasIndex(x => x.CorrelationId).IsUnique();
         modelBuilder.Entity<IngestionJob>().HasIndex(x => x.IdempotencyKey).IsUnique();
+        modelBuilder.Entity<RuleConfiguration>().HasIndex(x => new { x.RuleId, x.Version }).IsUnique();
     }
 }
 
@@ -57,4 +60,28 @@ public sealed class IngestionJob
     public string? OperationOutcomeJson { get; set; }
     public DateTimeOffset CreatedAt { get; set; } = DateTimeOffset.UtcNow;
     public DateTimeOffset? CompletedAt { get; set; }
+}
+
+
+public sealed class RuleConfiguration
+{
+    public Guid Id { get; set; }
+    public required string RuleId { get; set; }
+    public required string Version { get; set; }
+    public required string DisplayName { get; set; }
+    public required string ConfigurationJson { get; set; }
+    public bool Active { get; set; } = true;
+}
+
+public sealed class RuleExecutionAudit
+{
+    public Guid Id { get; set; }
+    public required string PatientReference { get; set; }
+    public required string RuleId { get; set; }
+    public required string RuleVersion { get; set; }
+    public required string InputResourceIds { get; set; }
+    public DateTimeOffset ExecutedAt { get; set; } = DateTimeOffset.UtcNow;
+    public required string Result { get; set; }
+    public required string OutputResourceIds { get; set; }
+    public required string InitiatedBy { get; set; }
 }

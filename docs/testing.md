@@ -1,3 +1,3 @@
 # Testing
 
-Unit tests cover domain transition rules and will expand to permissions, rule versioning, bundle validation, references, units, and duplicate detection. Integration test projects are scaffolded for API, FHIR, and Web scenarios with Testcontainers planned for SQL Server and Keycloak.
+The current repository intentionally does not include test projects because the latest implementation request was to avoid adding test projects. Production teams should add automated checks in CI before regulated deployment, including unit tests, API integration tests, FHIR server integration tests, authorization tests, ingestion idempotency tests, and smoke tests for `docker compose up --build`.

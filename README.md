@@ -39,3 +39,12 @@ See `docs/architecture.md`. The UI calls the custom API; the API uses `IFhirReso
 ## Production warnings
 
 Do not use local secrets, disabled FHIR auth, or development Keycloak passwords in production. Regulatory compliance requires legal, organizational, and operational controls in addition to this software.
+
+## Implemented FHIR levels
+
+- **Level 1 Foundation:** JSON/XML validation, OperationOutcome handling, datatype display components, extension registry, and recursive custom-extension checks.
+- **Level 2 Implementer support:** CapabilityStatement dashboard, terminology operations, OAuth/OIDC authorization policies, AuditEvent creation, and constrained API Explorer.
+- **Levels 3-4 resource workflows:** Patient-specific APIs plus generic resource management for administration, clinical, diagnostics, medications, workflow, and financial resources through the custom API layer.
+- **Level 5 clinical reasoning:** Deterministic versioned rule execution with GuidanceResponse output, rule execution audit records, and a prominent no-medical-advice safety boundary.
+
+Automated test projects are intentionally omitted per the latest request. Run `dotnet build FhirPlatform.sln` and `docker compose up --build` in a .NET 9/Docker environment before deployment.

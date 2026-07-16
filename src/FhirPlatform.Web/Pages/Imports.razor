@@ -1,0 +1,9 @@
+@page "/imports"
+@using FhirPlatform.Application.Contracts
+@inject IHttpClientFactory HttpClientFactory
+<h1>FHIR Bundle Imports</h1>
+<label class="form-label">Idempotency key</label><input class="form-control" @bind="_idempotencyKey" />
+<label class="form-label">Bundle JSON</label><textarea class="form-control font-monospace" rows="12" @bind="_bundleJson"></textarea>
+<button class="btn btn-primary mt-2" @onclick="IngestAsync">Ingest Bundle</button>
+@if (_response is not null) { <div class="alert alert-info mt-3">Job @_response.JobId: @_response.Status</div><RawResourceViewer Title="OperationOutcome" Content="_response.OperationOutcomeJson" Format="json" /> }
+@code { private string _idempotencyKey = Guid.NewGuid().ToString("n"); private string _bundleJson = ""; private FhirBundleIngestionResponse? _response; private async Task IngestAsync() => _response = await (await HttpClientFactory.CreateClient("Api").PostAsJsonAsync("api/ingestion/fhir-bundle", new FhirBundleIngestionRequest(_bundleJson, _idempotencyKey))).Content.ReadFromJsonAsync<FhirBundleIngestionResponse>(); }

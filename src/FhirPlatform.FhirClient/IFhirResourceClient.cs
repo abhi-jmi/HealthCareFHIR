@@ -10,7 +10,9 @@ public interface IFhirResourceClient
     Task<Bundle> SearchAsync<T>(IReadOnlyDictionary<string, string?> parameters, CancellationToken cancellationToken) where T : Resource, new();
     Task<Bundle> SearchAsync(string resourceType, IReadOnlyDictionary<string, string?> parameters, CancellationToken cancellationToken);
     Task<T> CreateAsync<T>(T resource, CancellationToken cancellationToken) where T : Resource, new();
+    Task<Resource> CreateRawAsync(Resource resource, CancellationToken cancellationToken);
     Task<T> UpdateAsync<T>(string id, T resource, CancellationToken cancellationToken) where T : Resource, new();
+    Task<Resource> UpdateRawAsync(string resourceType, string id, Resource resource, CancellationToken cancellationToken);
     Task<Resource> PatchAsync(string resourceType, string id, Parameters patch, CancellationToken cancellationToken);
     Task DeleteAsync<T>(string id, CancellationToken cancellationToken) where T : Resource, new();
     Task<Bundle> HistoryAsync<T>(string id, CancellationToken cancellationToken) where T : Resource, new();
