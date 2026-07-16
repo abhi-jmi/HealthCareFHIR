@@ -22,3 +22,7 @@ Phase 1 scope includes solution setup, Docker Compose, Microsoft FHIR Server con
 The continuation adds API-backed FHIR resource validation, a reusable OperationOutcome UI panel, and an explicit role-to-permission map. Validation accepts JSON or XML, parses with Firely R4 serializers, checks the expected resource type, calls the FHIR server `$validate` operation when local checks pass, and returns normalized JSON, XML, warnings, errors, and the raw OperationOutcome for UI display and downloads.
 
 Operational database entities remain deliberately non-clinical: extension registry, saved API requests, ingestion job state, and audit correlations. Patient, Observation, DiagnosticReport, and other clinical resources continue to live only in the FHIR server and are accessed by REST.
+
+## Level 2 implementer support
+
+Level 2 adds implementer-support APIs around the Microsoft FHIR Server rather than replacing it. Conformance support reads the server CapabilityStatement, projects supported resources, interactions, search parameters, operations, FHIR version and expected-resource gaps. Terminology support searches CodeSystem, ValueSet and ConceptMap resources and delegates ValueSet `$expand`, ValueSet `$validate-code`, and ConceptMap `$translate` to FHIR REST operations. The API Explorer is constrained to an allow-list of resource types and never accepts arbitrary external URLs.

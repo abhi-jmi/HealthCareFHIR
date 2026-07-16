@@ -9,3 +9,7 @@ API policies are generated from the explicit permission catalog. A request is au
 ## PHI-safe audit boundary
 
 The application database stores correlation IDs and FHIR AuditEvent references rather than complete clinical payloads. Clinical audit records should be written to the FHIR server as AuditEvent resources; the relational audit table is for operational correlation and troubleshooting without duplicating PHI.
+
+## Level 2 security and privacy support
+
+Level 2 API policies are generated from explicit permissions and are enforced in controllers, not by UI visibility. AuditEvent creation is routed through the custom API and persisted through FHIR REST so the FHIR server remains the clinical/audit system of record. Application SQL stores only operational correlation metadata and registry/configuration data.

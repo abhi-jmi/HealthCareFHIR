@@ -22,6 +22,12 @@ docker compose up --build
 - FHIR metadata: http://localhost:8080/metadata
 - Keycloak: http://localhost:8081
 
+
+## Implemented levels
+
+- Level 1 foundation: FHIR JSON/XML validation, core datatype display components, OperationOutcome display, raw resource viewing, Bundle viewing, and extension registry enforcement.
+- Level 2 implementer support: CapabilityStatement-derived conformance dashboard details, terminology search and operations, constrained FHIR API Explorer, API-enforced authorization policies, and AuditEvent creation through FHIR REST.
+
 ## Development credentials
 
 Keycloak local users include `admin`, `clinician`, and `auditor` with matching development passwords. These are local-only and must not be used in production.

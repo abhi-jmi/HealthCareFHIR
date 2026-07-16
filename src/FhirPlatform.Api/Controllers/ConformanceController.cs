@@ -8,8 +8,11 @@ namespace FhirPlatform.Api.Controllers;
 
 [ApiController]
 [Route("api/conformance")]
-public sealed class ConformanceController(IConformanceService conformance) : ControllerBase
+public sealed class ConformanceController(IConformanceService conformance, IConformanceCatalogService catalog) : ControllerBase
 {
     [HttpGet("dashboard"), Authorize(Policy = Permissions.ConformanceManage)]
     public Task<CapabilityDashboardDto> Dashboard(CancellationToken cancellationToken) => conformance.GetDashboardAsync(cancellationToken);
+
+    [HttpGet("dashboard/details"), Authorize(Policy = Permissions.ConformanceManage)]
+    public Task<ConformanceDashboardDetailDto> DetailedDashboard(CancellationToken cancellationToken) => catalog.GetDetailedDashboardAsync(cancellationToken);
 }

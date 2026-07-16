@@ -14,13 +14,19 @@ public sealed class MicrosoftFhirResourceClient(HttpClient httpClient, ILogger<M
     public async Task<T?> ReadAsync<T>(string id, CancellationToken cancellationToken) where T : Resource, new() =>
         await SendAsync<T>(HttpMethod.Get, $"{new T().TypeName}/{Uri.EscapeDataString(id)}", null, cancellationToken);
 
+    public async Task<Resource?> ReadAsync(string resourceType, string id, CancellationToken cancellationToken) =>
+        await SendAsync<Resource>(HttpMethod.Get, $"{Uri.EscapeDataString(resourceType)}/{Uri.EscapeDataString(id)}", null, cancellationToken);
+
     public async Task<T?> VersionReadAsync<T>(string id, string versionId, CancellationToken cancellationToken) where T : Resource, new() =>
         await SendAsync<T>(HttpMethod.Get, $"{new T().TypeName}/{Uri.EscapeDataString(id)}/_history/{Uri.EscapeDataString(versionId)}", null, cancellationToken);
 
-    public async Task<Bundle> SearchAsync<T>(IReadOnlyDictionary<string, string?> parameters, CancellationToken cancellationToken) where T : Resource, new()
+    public Task<Bundle> SearchAsync<T>(IReadOnlyDictionary<string, string?> parameters, CancellationToken cancellationToken) where T : Resource, new() =>
+        SearchAsync(new T().TypeName, parameters, cancellationToken);
+
+    public async Task<Bundle> SearchAsync(string resourceType, IReadOnlyDictionary<string, string?> parameters, CancellationToken cancellationToken)
     {
         var query = string.Join('&', parameters.Where(p => !string.IsNullOrWhiteSpace(p.Value)).Select(p => $"{Uri.EscapeDataString(p.Key)}={Uri.EscapeDataString(p.Value!)}"));
-        return await SendAsync<Bundle>(HttpMethod.Get, $"{new T().TypeName}?{query}", null, cancellationToken) ?? new Bundle();
+        return await SendAsync<Bundle>(HttpMethod.Get, $"{Uri.EscapeDataString(resourceType)}?{query}", null, cancellationToken) ?? new Bundle();
     }
 
     public async Task<T> CreateAsync<T>(T resource, CancellationToken cancellationToken) where T : Resource, new() =>
@@ -44,8 +50,13 @@ public sealed class MicrosoftFhirResourceClient(HttpClient httpClient, ILogger<M
         (await SendAsync<OperationOutcome>(HttpMethod.Post, $"{resource.TypeName}/$validate", resource, cancellationToken))!;
     public async Task<CapabilityStatement> GetCapabilityStatementAsync(CancellationToken cancellationToken) =>
         (await SendAsync<CapabilityStatement>(HttpMethod.Get, "metadata", null, cancellationToken))!;
-    public async Task<Resource> ExecuteOperationAsync(string operationName, Parameters parameters, CancellationToken cancellationToken) =>
-        (await SendAsync<Resource>(HttpMethod.Post, '$' + operationName.TrimStart('$'), parameters, cancellationToken))!;
+    public async Task<Resource> ExecuteOperationAsync(string operationName, Parameters parameters, CancellationToken cancellationToken)
+    {
+        var normalizedOperation = operationName.Contains('/', StringComparison.Ordinal)
+            ? operationName.TrimStart('/')
+            : '$' + operationName.TrimStart('$');
+        return (await SendAsync<Resource>(HttpMethod.Post, normalizedOperation, parameters, cancellationToken))!;
+    }
     public async Task<Parameters> ExportAsync(Parameters parameters, CancellationToken cancellationToken) =>
         (await SendAsync<Parameters>(HttpMethod.Post, "$export", parameters, cancellationToken))!;
     public async Task<Parameters> ImportAsync(Parameters parameters, CancellationToken cancellationToken) =>

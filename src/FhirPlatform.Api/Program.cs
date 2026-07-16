@@ -18,6 +18,10 @@ builder.Services.AddOptions<FhirClientOptions>().Bind(builder.Configuration.GetS
 builder.Services.AddHttpClient<IFhirResourceClient, MicrosoftFhirResourceClient>((sp, client) => { var options = sp.GetRequiredService<IOptions<FhirClientOptions>>().Value; client.BaseAddress = new Uri(options.BaseUrl.TrimEnd('/') + "/"); client.Timeout = options.Timeout; });
 builder.Services.AddScoped<IPatientService, PatientService>();
 builder.Services.AddScoped<IConformanceService, ConformanceService>();
+builder.Services.AddScoped<IConformanceCatalogService, ConformanceCatalogService>();
+builder.Services.AddScoped<ITerminologyService, TerminologyService>();
+builder.Services.AddScoped<IFhirExplorerService, FhirExplorerService>();
+builder.Services.AddScoped<IAuditEventService, AuditEventService>();
 builder.Services.AddScoped<IResourceValidationService, ResourceValidationService>();
 builder.Services.AddScoped<IExtensionRegistryService, ExtensionRegistryService>();
 builder.Services.AddScoped<IExtensionRegistryReader>(sp => sp.GetRequiredService<IExtensionRegistryService>());

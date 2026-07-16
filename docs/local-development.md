@@ -31,3 +31,11 @@ Development passwords in `docker-compose.yml` are local-only defaults and must b
 
 - `/validation` validates pasted FHIR JSON/XML through `POST /api/fhir/validation`, displays OperationOutcome issues, and exposes formatted JSON/XML download links.
 - `/administration/extensions` manages the custom extension registry used to reject unknown custom extensions during validation and business workflows.
+
+## Level 2 API routes
+
+- `GET /api/conformance/dashboard/details` returns CapabilityStatement-derived resource, interaction, search-parameter, operation and expected-resource gap details.
+- `GET /api/terminology/code-systems`, `/value-sets`, and `/concept-maps` search terminology resources through FHIR REST.
+- `POST /api/terminology/value-set/$expand`, `/value-set/$validate-code`, and `/concept-map/$translate` delegate terminology operations to the configured FHIR server.
+- `POST /api/fhir-explorer/execute` executes constrained read/search requests against an allow-list of FHIR resource types.
+- `POST /api/audit/events` writes AuditEvent resources through FHIR REST.
