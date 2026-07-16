@@ -1,0 +1,10 @@
+@using Hl7.Fhir.Model
+@if (Identifier is null)
+{
+    <span class="text-muted">No identifier</span>
+}
+else
+{
+    <span><code>@Identifier.System</code>|<strong>@Identifier.Value</strong></span>
+}
+@code { [Parameter] public Identifier? Identifier { get; set; } }
