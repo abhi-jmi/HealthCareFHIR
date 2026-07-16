@@ -39,3 +39,9 @@ Development passwords in `docker-compose.yml` are local-only defaults and must b
 - `POST /api/terminology/value-set/$expand`, `/value-set/$validate-code`, and `/concept-map/$translate` delegate terminology operations to the configured FHIR server.
 - `POST /api/fhir-explorer/execute` executes constrained read/search requests against an allow-list of FHIR resource types.
 - `POST /api/audit/events` writes AuditEvent resources through FHIR REST.
+
+## Inspecting the FHIR server SQL schema
+
+`docker compose up --build` now runs `fhir-sql-init` to create the `FHIR` database before the Microsoft FHIR Server starts. Microsoft FHIR Server then creates and migrates its own SQL schema. To view those server-owned tables, run the verification SQL in `deploy/sql/002_verify_fhir_server_schema.sql` against the `fhir-sql` container after the FHIR server is healthy.
+
+The application database is initialized separately by `application-sql-init` using `deploy/sql/001_app_init.sql`; it intentionally contains only operational platform tables, not duplicated FHIR resource tables.

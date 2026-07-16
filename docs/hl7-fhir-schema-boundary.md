@@ -12,3 +12,11 @@ This platform does not recreate Patient, Observation, DiagnosticReport, Medicati
 ## Operational tables
 
 The SQL initialization script intentionally creates only operational platform tables. Any table that would duplicate a FHIR resource, such as `Patients`, `Observations`, `DiagnosticReports`, `Practitioners`, `Claims` or `Measures`, is intentionally excluded.
+
+## Seeing the Microsoft FHIR Server tables locally
+
+HL7 FHIR defines the resource model and REST semantics; it does not define a portable relational table-per-resource schema. In local development, the `fhir-sql` database is initialized as `FHIR`, and Microsoft FHIR Server applies its own SQL persistence schema on startup. That is the correct production boundary for this platform.
+
+To inspect the actual Microsoft FHIR Server SQL schema after `docker compose up --build`, connect to the `fhir-sql` container and run `deploy/sql/002_verify_fhir_server_schema.sql`. Those tables are owned by Microsoft FHIR Server and must not be queried or modified by custom application code.
+
+The separate `application-sql` database is initialized from `deploy/sql/001_app_init.sql` and contains only non-clinical operational tables. This separation is intentional so the platform can later move from self-hosted Microsoft FHIR Server to Azure Health Data Services without rewriting business workflows around SQL internals.

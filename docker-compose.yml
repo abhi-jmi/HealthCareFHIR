@@ -4,9 +4,15 @@ services:
     environment: { ACCEPT_EULA: "Y", SA_PASSWORD: "${FHIR_SQL_PASSWORD:-LocalDev!Passw0rd}" }
     healthcheck: { test: ["CMD-SHELL", "/opt/mssql-tools18/bin/sqlcmd -S localhost -U sa -P $$SA_PASSWORD -C -Q 'SELECT 1' || exit 1"], interval: 10s, timeout: 5s, retries: 20 }
     volumes: [fhir-sql-data:/var/opt/mssql]
+  fhir-sql-init:
+    image: mcr.microsoft.com/mssql-tools
+    depends_on: { fhir-sql: { condition: service_healthy } }
+    volumes: [./deploy/sql:/sql:ro]
+    command: ["/bin/bash", "-c", "/opt/mssql-tools/bin/sqlcmd -S fhir-sql -U sa -P $$FHIR_SQL_PASSWORD -i /sql/000_fhir_database.sql"]
+    environment: { FHIR_SQL_PASSWORD: "${FHIR_SQL_PASSWORD:-LocalDev!Passw0rd}" }
   fhir-server:
     image: mcr.microsoft.com/healthcareapis/r4-fhir-server:latest
-    depends_on: { fhir-sql: { condition: service_healthy } }
+    depends_on: { fhir-sql-init: { condition: service_completed_successfully } }
     environment:
       ASPNETCORE_URLS: http://+:8080
       FHIRServer__Security__Enabled: "false"
@@ -18,6 +24,12 @@ services:
     environment: { ACCEPT_EULA: "Y", SA_PASSWORD: "${APP_SQL_PASSWORD:-LocalDev!Passw0rd}" }
     healthcheck: { test: ["CMD-SHELL", "/opt/mssql-tools18/bin/sqlcmd -S localhost -U sa -P $$SA_PASSWORD -C -Q 'SELECT 1' || exit 1"], interval: 10s, timeout: 5s, retries: 20 }
     volumes: [application-sql-data:/var/opt/mssql]
+  application-sql-init:
+    image: mcr.microsoft.com/mssql-tools
+    depends_on: { application-sql: { condition: service_healthy } }
+    volumes: [./deploy/sql:/sql:ro]
+    command: ["/bin/bash", "-c", "/opt/mssql-tools/bin/sqlcmd -S application-sql -U sa -P $$APP_SQL_PASSWORD -i /sql/001_app_init.sql"]
+    environment: { APP_SQL_PASSWORD: "${APP_SQL_PASSWORD:-LocalDev!Passw0rd}" }
   keycloak-db:
     image: postgres:16
     environment: { POSTGRES_DB: keycloak, POSTGRES_USER: keycloak, POSTGRES_PASSWORD: "${KEYCLOAK_DB_PASSWORD:-keycloak}" }
@@ -38,7 +50,7 @@ services:
       Authentication__RequireHttpsMetadata: "false"
       Authentication__JwtBearer__Authority: http://keycloak:8080/realms/fhir-platform
       Authentication__JwtBearer__Audience: fhir-platform-api
-    depends_on: { application-sql: { condition: service_healthy }, fhir-server: { condition: service_healthy }, keycloak: { condition: service_started } }
+    depends_on: { application-sql-init: { condition: service_completed_successfully }, fhir-server: { condition: service_healthy }, keycloak: { condition: service_started } }
     ports: ["5000:8080"]
   application-web:
     build: { context: ., dockerfile: deploy/docker/web.Dockerfile }
