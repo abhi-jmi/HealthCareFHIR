@@ -29,6 +29,7 @@ builder.Services.AddScoped<IResourceManagementService, ResourceManagementService
 builder.Services.AddScoped<IFhirBundleIngestionService, FhirBundleIngestionService>();
 builder.Services.AddScoped<IClinicalDocumentExtractionService, DeterministicClinicalDocumentExtractionService>();
 builder.Services.AddScoped<IClinicalReasoningService, ClinicalReasoningService>();
+builder.Services.AddSingleton<IFhirLevelCatalogService, FhirLevelCatalogService>();
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options => { builder.Configuration.GetSection("Authentication:JwtBearer").Bind(options); options.RequireHttpsMetadata = builder.Configuration.GetValue("Authentication:RequireHttpsMetadata", false); });
 builder.Services.AddAuthorization(options =>
 {

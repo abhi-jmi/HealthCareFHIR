@@ -17,3 +17,7 @@ Administration, clinical, diagnostics, medications, workflow, financial, and cli
 FHIR Bundle ingestion is exposed at `POST /api/ingestion/fhir-bundle`. It validates bundle type, basic Patient/Observation structure, UCUM-system presence for Quantity observations, records idempotent ingestion job state, appends Provenance, and persists through FHIR transaction semantics.
 
 Clinical reasoning is exposed at `/api/clinical-reasoning`. Rules are versioned JSON configurations in the operational database. The included HbA1c review rule emits only a configured review message in a GuidanceResponse, records input/output references, and explicitly avoids diagnosis, medication recommendations, and generative clinical decision-making.
+
+## HL7 level map
+
+The platform exposes a catalog endpoint at `/api/fhir-levels` and a Blazor page at `/fhir-levels` that mirrors the Level 1-5 groupings from the HL7 FHIR R4 home page. Each module lists the relevant FHIR resource types plus the custom API and UI routes that operate against Microsoft FHIR Server.

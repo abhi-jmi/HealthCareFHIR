@@ -48,3 +48,7 @@ Do not use local secrets, disabled FHIR auth, or development Keycloak passwords 
 - **Level 5 clinical reasoning:** Deterministic versioned rule execution with GuidanceResponse output, rule execution audit records, and a prominent no-medical-advice safety boundary.
 
 Automated test projects are intentionally omitted per the latest request. Run `dotnet build FhirPlatform.sln` and `docker compose up --build` in a .NET 9/Docker environment before deployment.
+
+## HL7 FHIR R4 level map and schema boundary
+
+The `/fhir-levels` UI route and `/api/fhir-levels` API expose the Level 1-5 map from the HL7 FHIR R4 home page, including Foundation, Implementer Support, Security & Privacy, Conformance, Terminology, Exchange, Administration, Clinical, Diagnostics, Medications, Workflow, Financial and Clinical Reasoning. The application database intentionally excludes HL7 clinical resource tables; canonical resource persistence uses Microsoft FHIR Server's implementation of the HL7 FHIR R4 resource model. See `docs/hl7-fhir-schema-boundary.md`.
