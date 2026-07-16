@@ -1,0 +1,3 @@
+@page "/locations"
+<TypedResourceWorkspace ResourceType="Location" Title="Location management" Description="Facilities, departments, rooms, beds, operational status, managing organization, endpoints, and service locations." Tabs="Tabs" Filters="Filters" WorkflowText="Location workflows use Location.partOf, managingOrganization, endpoint, type, physicalType, and status fields." />
+@code { private static readonly string[] Tabs = ["Facilities", "Departments", "Rooms", "Services", "Endpoints", "Editor", "Audit"]; private static readonly TypedResourceWorkspace.WorkflowFilter[] Filters = [new("name", "Name", "location"), new("organization", "Organization", "Organization/id"), new("status", "Status", "active/suspended/inactive")]; }

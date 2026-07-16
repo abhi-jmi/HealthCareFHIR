@@ -26,3 +26,7 @@ Operational database entities remain deliberately non-clinical: extension regist
 ## Level 2 implementer support
 
 Level 2 adds implementer-support APIs around the Microsoft FHIR Server rather than replacing it. Conformance support reads the server CapabilityStatement, projects supported resources, interactions, search parameters, operations, FHIR version and expected-resource gaps. Terminology support searches CodeSystem, ValueSet and ConceptMap resources and delegates ValueSet `$expand`, ValueSet `$validate-code`, and ConceptMap `$translate` to FHIR REST operations. The API Explorer is constrained to an allow-list of resource types and never accepts arbitrary external URLs.
+
+## Typed workflow UI coverage
+
+The Blazor application now exposes typed workflow entry pages for Patient, Practitioner, Organization, Location, Clinical, Diagnostics, Medications, Workflow, Financial, and Clinical Reasoning areas. Each workflow keeps clinical persistence behind the custom API and Microsoft FHIR Server, provides domain-specific search filters and lifecycle tabs, and supports raw canonical FHIR JSON create/update for resources not yet backed by bespoke forms. This balances production-safe FHIR boundaries with incremental typed UX expansion.

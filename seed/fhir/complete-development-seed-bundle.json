@@ -1,0 +1,3482 @@
+{
+  "resourceType": "Bundle",
+  "id": "complete-development-seed",
+  "type": "transaction",
+  "entry": [
+    {
+      "fullUrl": "urn:uuid:b1898910-80b1-416c-94f8-77756c1be620",
+      "resource": {
+        "resourceType": "Patient",
+        "id": "patient-1",
+        "active": true,
+        "name": [
+          {
+            "use": "official",
+            "family": "Fictional1",
+            "given": [
+              "Alex1"
+            ]
+          }
+        ],
+        "gender": "female",
+        "birthDate": "1981-01-02",
+        "identifier": [
+          {
+            "system": "https://example.org/mrn",
+            "value": "MRN0001"
+          }
+        ]
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Patient/patient-1"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:54c0ae90-10f6-4ce1-97a9-3be0b3997b04",
+      "resource": {
+        "resourceType": "Patient",
+        "id": "patient-2",
+        "active": true,
+        "name": [
+          {
+            "use": "official",
+            "family": "Fictional2",
+            "given": [
+              "Alex2"
+            ]
+          }
+        ],
+        "gender": "male",
+        "birthDate": "1982-01-03",
+        "identifier": [
+          {
+            "system": "https://example.org/mrn",
+            "value": "MRN0002"
+          }
+        ]
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Patient/patient-2"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:844f9f18-34b8-44a8-8027-b8a271e82f7f",
+      "resource": {
+        "resourceType": "Patient",
+        "id": "patient-3",
+        "active": true,
+        "name": [
+          {
+            "use": "official",
+            "family": "Fictional3",
+            "given": [
+              "Alex3"
+            ]
+          }
+        ],
+        "gender": "female",
+        "birthDate": "1983-01-04",
+        "identifier": [
+          {
+            "system": "https://example.org/mrn",
+            "value": "MRN0003"
+          }
+        ]
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Patient/patient-3"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:747d7155-5345-43bd-aa01-cfff07109625",
+      "resource": {
+        "resourceType": "Patient",
+        "id": "patient-4",
+        "active": true,
+        "name": [
+          {
+            "use": "official",
+            "family": "Fictional4",
+            "given": [
+              "Alex4"
+            ]
+          }
+        ],
+        "gender": "male",
+        "birthDate": "1984-01-05",
+        "identifier": [
+          {
+            "system": "https://example.org/mrn",
+            "value": "MRN0004"
+          }
+        ]
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Patient/patient-4"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:9a178d6f-6763-4bf7-80ef-e85754c76cdb",
+      "resource": {
+        "resourceType": "Patient",
+        "id": "patient-5",
+        "active": true,
+        "name": [
+          {
+            "use": "official",
+            "family": "Fictional5",
+            "given": [
+              "Alex5"
+            ]
+          }
+        ],
+        "gender": "female",
+        "birthDate": "1985-01-06",
+        "identifier": [
+          {
+            "system": "https://example.org/mrn",
+            "value": "MRN0005"
+          }
+        ]
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Patient/patient-5"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:71264594-5f9a-4a64-86e9-6945a278943e",
+      "resource": {
+        "resourceType": "Patient",
+        "id": "patient-6",
+        "active": true,
+        "name": [
+          {
+            "use": "official",
+            "family": "Fictional6",
+            "given": [
+              "Alex6"
+            ]
+          }
+        ],
+        "gender": "male",
+        "birthDate": "1986-01-07",
+        "identifier": [
+          {
+            "system": "https://example.org/mrn",
+            "value": "MRN0006"
+          }
+        ]
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Patient/patient-6"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:d6b70604-387e-42a5-bf64-21f3708068a1",
+      "resource": {
+        "resourceType": "Patient",
+        "id": "patient-7",
+        "active": true,
+        "name": [
+          {
+            "use": "official",
+            "family": "Fictional7",
+            "given": [
+              "Alex7"
+            ]
+          }
+        ],
+        "gender": "female",
+        "birthDate": "1987-01-08",
+        "identifier": [
+          {
+            "system": "https://example.org/mrn",
+            "value": "MRN0007"
+          }
+        ]
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Patient/patient-7"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:872cd854-983e-4334-a126-b58bd4500301",
+      "resource": {
+        "resourceType": "Patient",
+        "id": "patient-8",
+        "active": true,
+        "name": [
+          {
+            "use": "official",
+            "family": "Fictional8",
+            "given": [
+              "Alex8"
+            ]
+          }
+        ],
+        "gender": "male",
+        "birthDate": "1988-01-09",
+        "identifier": [
+          {
+            "system": "https://example.org/mrn",
+            "value": "MRN0008"
+          }
+        ]
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Patient/patient-8"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:0232ca34-ffe9-4baa-a5e8-b7f157f0e077",
+      "resource": {
+        "resourceType": "Patient",
+        "id": "patient-9",
+        "active": true,
+        "name": [
+          {
+            "use": "official",
+            "family": "Fictional9",
+            "given": [
+              "Alex9"
+            ]
+          }
+        ],
+        "gender": "female",
+        "birthDate": "1989-01-10",
+        "identifier": [
+          {
+            "system": "https://example.org/mrn",
+            "value": "MRN0009"
+          }
+        ]
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Patient/patient-9"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:9ea99e6b-0048-4f7c-a3a1-5d02e8c3b4cf",
+      "resource": {
+        "resourceType": "Patient",
+        "id": "patient-10",
+        "active": true,
+        "name": [
+          {
+            "use": "official",
+            "family": "Fictional10",
+            "given": [
+              "Alex10"
+            ]
+          }
+        ],
+        "gender": "male",
+        "birthDate": "1980-01-11",
+        "identifier": [
+          {
+            "system": "https://example.org/mrn",
+            "value": "MRN0010"
+          }
+        ]
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Patient/patient-10"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:47de928f-7ba9-4a0b-bf08-8676ae722bb5",
+      "resource": {
+        "resourceType": "Practitioner",
+        "id": "practitioner-1",
+        "active": true,
+        "name": [
+          {
+            "family": "Clinician1",
+            "given": [
+              "Taylor"
+            ]
+          }
+        ],
+        "identifier": [
+          {
+            "system": "https://example.org/npi",
+            "value": "9990000001"
+          }
+        ]
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Practitioner/practitioner-1"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:878b9eeb-47e5-45a4-a463-13696c1fb7d9",
+      "resource": {
+        "resourceType": "Practitioner",
+        "id": "practitioner-2",
+        "active": true,
+        "name": [
+          {
+            "family": "Clinician2",
+            "given": [
+              "Taylor"
+            ]
+          }
+        ],
+        "identifier": [
+          {
+            "system": "https://example.org/npi",
+            "value": "9990000002"
+          }
+        ]
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Practitioner/practitioner-2"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:8cab9231-99df-45ea-88fe-c9a8b36ee0c6",
+      "resource": {
+        "resourceType": "Practitioner",
+        "id": "practitioner-3",
+        "active": true,
+        "name": [
+          {
+            "family": "Clinician3",
+            "given": [
+              "Taylor"
+            ]
+          }
+        ],
+        "identifier": [
+          {
+            "system": "https://example.org/npi",
+            "value": "9990000003"
+          }
+        ]
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Practitioner/practitioner-3"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:dc4b2622-fc1c-4728-8dcb-73ebac6e7bc7",
+      "resource": {
+        "resourceType": "Practitioner",
+        "id": "practitioner-4",
+        "active": true,
+        "name": [
+          {
+            "family": "Clinician4",
+            "given": [
+              "Taylor"
+            ]
+          }
+        ],
+        "identifier": [
+          {
+            "system": "https://example.org/npi",
+            "value": "9990000004"
+          }
+        ]
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Practitioner/practitioner-4"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:d573be6a-5543-4204-901a-7361b6f90d68",
+      "resource": {
+        "resourceType": "Practitioner",
+        "id": "practitioner-5",
+        "active": true,
+        "name": [
+          {
+            "family": "Clinician5",
+            "given": [
+              "Taylor"
+            ]
+          }
+        ],
+        "identifier": [
+          {
+            "system": "https://example.org/npi",
+            "value": "9990000005"
+          }
+        ]
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Practitioner/practitioner-5"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:63da2b65-2fe6-42e6-8ff2-02279545e432",
+      "resource": {
+        "resourceType": "Organization",
+        "id": "org-1",
+        "active": true,
+        "name": "Fictional Health Organization 1"
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Organization/org-1"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:b13c9ba3-6875-4858-9c4c-52c53e177ca4",
+      "resource": {
+        "resourceType": "Organization",
+        "id": "org-2",
+        "active": true,
+        "name": "Fictional Health Organization 2"
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Organization/org-2"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:424e5f76-d832-40bb-a109-18f29923069a",
+      "resource": {
+        "resourceType": "Location",
+        "id": "location-1",
+        "status": "active",
+        "name": "Fictional Clinic Location 1",
+        "managingOrganization": {
+          "reference": "Organization/org-1"
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Location/location-1"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:21d81947-f716-494b-a2ab-5389104535f5",
+      "resource": {
+        "resourceType": "Location",
+        "id": "location-2",
+        "status": "active",
+        "name": "Fictional Clinic Location 2",
+        "managingOrganization": {
+          "reference": "Organization/org-1"
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Location/location-2"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:50721cd4-3411-4608-bf0c-dfb4419081ae",
+      "resource": {
+        "resourceType": "Location",
+        "id": "location-3",
+        "status": "active",
+        "name": "Fictional Clinic Location 3",
+        "managingOrganization": {
+          "reference": "Organization/org-1"
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Location/location-3"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:a9051324-6926-4cb5-9fda-80a9ef7e560b",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "observation-1",
+        "status": "final",
+        "code": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "4548-4",
+              "display": "Hemoglobin A1c/Hemoglobin.total in Blood"
+            }
+          ],
+          "text": "HbA1c"
+        },
+        "subject": {
+          "reference": "Patient/patient-2"
+        },
+        "effectiveDateTime": "2026-01-01T00:00:00Z",
+        "valueQuantity": {
+          "value": 5.8,
+          "unit": "%",
+          "system": "http://unitsofmeasure.org",
+          "code": "%"
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Observation/observation-1"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:8ef235fd-03a4-4639-9ef2-b77dfe01d8c0",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "observation-2",
+        "status": "final",
+        "code": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "4548-4",
+              "display": "Hemoglobin A1c/Hemoglobin.total in Blood"
+            }
+          ],
+          "text": "HbA1c"
+        },
+        "subject": {
+          "reference": "Patient/patient-3"
+        },
+        "effectiveDateTime": "2026-02-01T00:00:00Z",
+        "valueQuantity": {
+          "value": 6.2,
+          "unit": "%",
+          "system": "http://unitsofmeasure.org",
+          "code": "%"
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Observation/observation-2"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:f98ceeac-f64b-47fc-95ee-186d41b9fbc6",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "observation-3",
+        "status": "final",
+        "code": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "4548-4",
+              "display": "Hemoglobin A1c/Hemoglobin.total in Blood"
+            }
+          ],
+          "text": "HbA1c"
+        },
+        "subject": {
+          "reference": "Patient/patient-4"
+        },
+        "effectiveDateTime": "2026-03-01T00:00:00Z",
+        "valueQuantity": {
+          "value": 6.6,
+          "unit": "%",
+          "system": "http://unitsofmeasure.org",
+          "code": "%"
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Observation/observation-3"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:c1bb1e5f-b8fa-49a2-89cd-57b02a765273",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "observation-4",
+        "status": "final",
+        "code": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "4548-4",
+              "display": "Hemoglobin A1c/Hemoglobin.total in Blood"
+            }
+          ],
+          "text": "HbA1c"
+        },
+        "subject": {
+          "reference": "Patient/patient-5"
+        },
+        "effectiveDateTime": "2026-04-01T00:00:00Z",
+        "valueQuantity": {
+          "value": 7.0,
+          "unit": "%",
+          "system": "http://unitsofmeasure.org",
+          "code": "%"
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Observation/observation-4"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:ca3eb6f5-26e2-40b2-966d-17b478643a5c",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "observation-5",
+        "status": "final",
+        "code": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "4548-4",
+              "display": "Hemoglobin A1c/Hemoglobin.total in Blood"
+            }
+          ],
+          "text": "HbA1c"
+        },
+        "subject": {
+          "reference": "Patient/patient-6"
+        },
+        "effectiveDateTime": "2026-05-01T00:00:00Z",
+        "valueQuantity": {
+          "value": 7.4,
+          "unit": "%",
+          "system": "http://unitsofmeasure.org",
+          "code": "%"
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Observation/observation-5"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:55ffb02a-2fc4-48d2-8d4d-5747922ec663",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "observation-6",
+        "status": "final",
+        "code": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "4548-4",
+              "display": "Hemoglobin A1c/Hemoglobin.total in Blood"
+            }
+          ],
+          "text": "HbA1c"
+        },
+        "subject": {
+          "reference": "Patient/patient-7"
+        },
+        "effectiveDateTime": "2026-06-01T00:00:00Z",
+        "valueQuantity": {
+          "value": 7.8,
+          "unit": "%",
+          "system": "http://unitsofmeasure.org",
+          "code": "%"
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Observation/observation-6"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:af5c4103-89cc-42cc-9def-07f301f6049f",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "observation-7",
+        "status": "final",
+        "code": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "4548-4",
+              "display": "Hemoglobin A1c/Hemoglobin.total in Blood"
+            }
+          ],
+          "text": "HbA1c"
+        },
+        "subject": {
+          "reference": "Patient/patient-8"
+        },
+        "effectiveDateTime": "2026-07-01T00:00:00Z",
+        "valueQuantity": {
+          "value": 8.2,
+          "unit": "%",
+          "system": "http://unitsofmeasure.org",
+          "code": "%"
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Observation/observation-7"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:3f8c1bea-52ec-4495-8cc7-cd6c616ddc35",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "observation-8",
+        "status": "final",
+        "code": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "4548-4",
+              "display": "Hemoglobin A1c/Hemoglobin.total in Blood"
+            }
+          ],
+          "text": "HbA1c"
+        },
+        "subject": {
+          "reference": "Patient/patient-9"
+        },
+        "effectiveDateTime": "2026-08-01T00:00:00Z",
+        "valueQuantity": {
+          "value": 5.4,
+          "unit": "%",
+          "system": "http://unitsofmeasure.org",
+          "code": "%"
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Observation/observation-8"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:5166b280-1611-4838-8335-613af3085326",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "observation-9",
+        "status": "final",
+        "code": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "4548-4",
+              "display": "Hemoglobin A1c/Hemoglobin.total in Blood"
+            }
+          ],
+          "text": "HbA1c"
+        },
+        "subject": {
+          "reference": "Patient/patient-10"
+        },
+        "effectiveDateTime": "2026-09-01T00:00:00Z",
+        "valueQuantity": {
+          "value": 5.8,
+          "unit": "%",
+          "system": "http://unitsofmeasure.org",
+          "code": "%"
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Observation/observation-9"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:6c9d1eb8-cc75-4adb-86c0-4c2866abf89c",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "observation-10",
+        "status": "final",
+        "code": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "4548-4",
+              "display": "Hemoglobin A1c/Hemoglobin.total in Blood"
+            }
+          ],
+          "text": "HbA1c"
+        },
+        "subject": {
+          "reference": "Patient/patient-1"
+        },
+        "effectiveDateTime": "2026-10-01T00:00:00Z",
+        "valueQuantity": {
+          "value": 6.2,
+          "unit": "%",
+          "system": "http://unitsofmeasure.org",
+          "code": "%"
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Observation/observation-10"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:a2907a8d-b626-4e0d-9fb3-abba4c3f7557",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "observation-11",
+        "status": "final",
+        "code": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "4548-4",
+              "display": "Hemoglobin A1c/Hemoglobin.total in Blood"
+            }
+          ],
+          "text": "HbA1c"
+        },
+        "subject": {
+          "reference": "Patient/patient-2"
+        },
+        "effectiveDateTime": "2026-11-01T00:00:00Z",
+        "valueQuantity": {
+          "value": 6.6,
+          "unit": "%",
+          "system": "http://unitsofmeasure.org",
+          "code": "%"
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Observation/observation-11"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:0d4a1a29-53b6-4650-9c73-494df181596d",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "observation-12",
+        "status": "final",
+        "code": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "4548-4",
+              "display": "Hemoglobin A1c/Hemoglobin.total in Blood"
+            }
+          ],
+          "text": "HbA1c"
+        },
+        "subject": {
+          "reference": "Patient/patient-3"
+        },
+        "effectiveDateTime": "2026-12-01T00:00:00Z",
+        "valueQuantity": {
+          "value": 7.0,
+          "unit": "%",
+          "system": "http://unitsofmeasure.org",
+          "code": "%"
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Observation/observation-12"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:a1081e13-d2bc-4eb2-8d17-cf1d68b6f106",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "observation-13",
+        "status": "final",
+        "code": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "4548-4",
+              "display": "Hemoglobin A1c/Hemoglobin.total in Blood"
+            }
+          ],
+          "text": "HbA1c"
+        },
+        "subject": {
+          "reference": "Patient/patient-4"
+        },
+        "effectiveDateTime": "2026-01-01T00:00:00Z",
+        "valueQuantity": {
+          "value": 7.4,
+          "unit": "%",
+          "system": "http://unitsofmeasure.org",
+          "code": "%"
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Observation/observation-13"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:ea4993a6-7916-4a06-a429-4874bf5991e8",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "observation-14",
+        "status": "final",
+        "code": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "4548-4",
+              "display": "Hemoglobin A1c/Hemoglobin.total in Blood"
+            }
+          ],
+          "text": "HbA1c"
+        },
+        "subject": {
+          "reference": "Patient/patient-5"
+        },
+        "effectiveDateTime": "2026-02-01T00:00:00Z",
+        "valueQuantity": {
+          "value": 7.8,
+          "unit": "%",
+          "system": "http://unitsofmeasure.org",
+          "code": "%"
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Observation/observation-14"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:83416d5a-bcd7-4747-9cc8-4b75e0b33a99",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "observation-15",
+        "status": "final",
+        "code": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "4548-4",
+              "display": "Hemoglobin A1c/Hemoglobin.total in Blood"
+            }
+          ],
+          "text": "HbA1c"
+        },
+        "subject": {
+          "reference": "Patient/patient-6"
+        },
+        "effectiveDateTime": "2026-03-01T00:00:00Z",
+        "valueQuantity": {
+          "value": 8.2,
+          "unit": "%",
+          "system": "http://unitsofmeasure.org",
+          "code": "%"
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Observation/observation-15"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:7d12c11c-270f-4dab-86f1-fe1c2f14c89b",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "observation-16",
+        "status": "final",
+        "code": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "4548-4",
+              "display": "Hemoglobin A1c/Hemoglobin.total in Blood"
+            }
+          ],
+          "text": "HbA1c"
+        },
+        "subject": {
+          "reference": "Patient/patient-7"
+        },
+        "effectiveDateTime": "2026-04-01T00:00:00Z",
+        "valueQuantity": {
+          "value": 5.4,
+          "unit": "%",
+          "system": "http://unitsofmeasure.org",
+          "code": "%"
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Observation/observation-16"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:0043b9ea-8fc9-4a38-81e4-95135f78abdc",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "observation-17",
+        "status": "final",
+        "code": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "4548-4",
+              "display": "Hemoglobin A1c/Hemoglobin.total in Blood"
+            }
+          ],
+          "text": "HbA1c"
+        },
+        "subject": {
+          "reference": "Patient/patient-8"
+        },
+        "effectiveDateTime": "2026-05-01T00:00:00Z",
+        "valueQuantity": {
+          "value": 5.8,
+          "unit": "%",
+          "system": "http://unitsofmeasure.org",
+          "code": "%"
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Observation/observation-17"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:f53f3bc0-4ac9-40d6-ba11-9685d29ae3d5",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "observation-18",
+        "status": "final",
+        "code": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "4548-4",
+              "display": "Hemoglobin A1c/Hemoglobin.total in Blood"
+            }
+          ],
+          "text": "HbA1c"
+        },
+        "subject": {
+          "reference": "Patient/patient-9"
+        },
+        "effectiveDateTime": "2026-06-01T00:00:00Z",
+        "valueQuantity": {
+          "value": 6.2,
+          "unit": "%",
+          "system": "http://unitsofmeasure.org",
+          "code": "%"
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Observation/observation-18"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:5d8edae8-6b9a-4e1e-9701-3c56e0b1887a",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "observation-19",
+        "status": "final",
+        "code": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "4548-4",
+              "display": "Hemoglobin A1c/Hemoglobin.total in Blood"
+            }
+          ],
+          "text": "HbA1c"
+        },
+        "subject": {
+          "reference": "Patient/patient-10"
+        },
+        "effectiveDateTime": "2026-07-01T00:00:00Z",
+        "valueQuantity": {
+          "value": 6.6,
+          "unit": "%",
+          "system": "http://unitsofmeasure.org",
+          "code": "%"
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Observation/observation-19"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:d12c84df-3b18-4b98-bdcb-6b734fb106dc",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "observation-20",
+        "status": "final",
+        "code": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "4548-4",
+              "display": "Hemoglobin A1c/Hemoglobin.total in Blood"
+            }
+          ],
+          "text": "HbA1c"
+        },
+        "subject": {
+          "reference": "Patient/patient-1"
+        },
+        "effectiveDateTime": "2026-08-01T00:00:00Z",
+        "valueQuantity": {
+          "value": 7.0,
+          "unit": "%",
+          "system": "http://unitsofmeasure.org",
+          "code": "%"
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Observation/observation-20"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:86034cb2-784c-4b00-94b2-4d70dfdfbeb1",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "observation-21",
+        "status": "final",
+        "code": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "4548-4",
+              "display": "Hemoglobin A1c/Hemoglobin.total in Blood"
+            }
+          ],
+          "text": "HbA1c"
+        },
+        "subject": {
+          "reference": "Patient/patient-2"
+        },
+        "effectiveDateTime": "2026-09-01T00:00:00Z",
+        "valueQuantity": {
+          "value": 7.4,
+          "unit": "%",
+          "system": "http://unitsofmeasure.org",
+          "code": "%"
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Observation/observation-21"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:be48dd25-9088-4292-b908-5095e0fecc04",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "observation-22",
+        "status": "final",
+        "code": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "4548-4",
+              "display": "Hemoglobin A1c/Hemoglobin.total in Blood"
+            }
+          ],
+          "text": "HbA1c"
+        },
+        "subject": {
+          "reference": "Patient/patient-3"
+        },
+        "effectiveDateTime": "2026-10-01T00:00:00Z",
+        "valueQuantity": {
+          "value": 7.8,
+          "unit": "%",
+          "system": "http://unitsofmeasure.org",
+          "code": "%"
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Observation/observation-22"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:a36c5591-ca20-49ff-b0ba-b4eb3a22633f",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "observation-23",
+        "status": "final",
+        "code": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "4548-4",
+              "display": "Hemoglobin A1c/Hemoglobin.total in Blood"
+            }
+          ],
+          "text": "HbA1c"
+        },
+        "subject": {
+          "reference": "Patient/patient-4"
+        },
+        "effectiveDateTime": "2026-11-01T00:00:00Z",
+        "valueQuantity": {
+          "value": 8.2,
+          "unit": "%",
+          "system": "http://unitsofmeasure.org",
+          "code": "%"
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Observation/observation-23"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:c7143bdf-b26a-4e0d-81ca-4f1eb5408b7a",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "observation-24",
+        "status": "final",
+        "code": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "4548-4",
+              "display": "Hemoglobin A1c/Hemoglobin.total in Blood"
+            }
+          ],
+          "text": "HbA1c"
+        },
+        "subject": {
+          "reference": "Patient/patient-5"
+        },
+        "effectiveDateTime": "2026-12-01T00:00:00Z",
+        "valueQuantity": {
+          "value": 5.4,
+          "unit": "%",
+          "system": "http://unitsofmeasure.org",
+          "code": "%"
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Observation/observation-24"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:309ab600-e65d-480e-ac1a-fec44f370a58",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "observation-25",
+        "status": "final",
+        "code": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "4548-4",
+              "display": "Hemoglobin A1c/Hemoglobin.total in Blood"
+            }
+          ],
+          "text": "HbA1c"
+        },
+        "subject": {
+          "reference": "Patient/patient-6"
+        },
+        "effectiveDateTime": "2026-01-01T00:00:00Z",
+        "valueQuantity": {
+          "value": 5.8,
+          "unit": "%",
+          "system": "http://unitsofmeasure.org",
+          "code": "%"
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Observation/observation-25"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:b51893ee-48e6-46a7-a508-e64814ee576d",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "observation-26",
+        "status": "final",
+        "code": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "4548-4",
+              "display": "Hemoglobin A1c/Hemoglobin.total in Blood"
+            }
+          ],
+          "text": "HbA1c"
+        },
+        "subject": {
+          "reference": "Patient/patient-7"
+        },
+        "effectiveDateTime": "2026-02-01T00:00:00Z",
+        "valueQuantity": {
+          "value": 6.2,
+          "unit": "%",
+          "system": "http://unitsofmeasure.org",
+          "code": "%"
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Observation/observation-26"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:745307d6-936b-45eb-af3f-958012500274",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "observation-27",
+        "status": "final",
+        "code": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "4548-4",
+              "display": "Hemoglobin A1c/Hemoglobin.total in Blood"
+            }
+          ],
+          "text": "HbA1c"
+        },
+        "subject": {
+          "reference": "Patient/patient-8"
+        },
+        "effectiveDateTime": "2026-03-01T00:00:00Z",
+        "valueQuantity": {
+          "value": 6.6,
+          "unit": "%",
+          "system": "http://unitsofmeasure.org",
+          "code": "%"
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Observation/observation-27"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:ebdc74d0-b621-4fb5-85e3-cfe9fdccb598",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "observation-28",
+        "status": "final",
+        "code": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "4548-4",
+              "display": "Hemoglobin A1c/Hemoglobin.total in Blood"
+            }
+          ],
+          "text": "HbA1c"
+        },
+        "subject": {
+          "reference": "Patient/patient-9"
+        },
+        "effectiveDateTime": "2026-04-01T00:00:00Z",
+        "valueQuantity": {
+          "value": 7.0,
+          "unit": "%",
+          "system": "http://unitsofmeasure.org",
+          "code": "%"
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Observation/observation-28"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:4b2a9a38-5040-4425-8041-c4c2374075b7",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "observation-29",
+        "status": "final",
+        "code": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "4548-4",
+              "display": "Hemoglobin A1c/Hemoglobin.total in Blood"
+            }
+          ],
+          "text": "HbA1c"
+        },
+        "subject": {
+          "reference": "Patient/patient-10"
+        },
+        "effectiveDateTime": "2026-05-01T00:00:00Z",
+        "valueQuantity": {
+          "value": 7.4,
+          "unit": "%",
+          "system": "http://unitsofmeasure.org",
+          "code": "%"
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Observation/observation-29"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:7599e9cb-ba23-4f05-b5cb-1e59aa5c155e",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "observation-30",
+        "status": "final",
+        "code": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "4548-4",
+              "display": "Hemoglobin A1c/Hemoglobin.total in Blood"
+            }
+          ],
+          "text": "HbA1c"
+        },
+        "subject": {
+          "reference": "Patient/patient-1"
+        },
+        "effectiveDateTime": "2026-06-01T00:00:00Z",
+        "valueQuantity": {
+          "value": 7.8,
+          "unit": "%",
+          "system": "http://unitsofmeasure.org",
+          "code": "%"
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Observation/observation-30"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:9f4a5ce1-d80d-401a-89e1-a3a2be2c59fa",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "observation-31",
+        "status": "final",
+        "code": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "4548-4",
+              "display": "Hemoglobin A1c/Hemoglobin.total in Blood"
+            }
+          ],
+          "text": "HbA1c"
+        },
+        "subject": {
+          "reference": "Patient/patient-2"
+        },
+        "effectiveDateTime": "2026-07-01T00:00:00Z",
+        "valueQuantity": {
+          "value": 8.2,
+          "unit": "%",
+          "system": "http://unitsofmeasure.org",
+          "code": "%"
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Observation/observation-31"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:1c1ba394-7cf1-4e52-a35e-f98b280a36ae",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "observation-32",
+        "status": "final",
+        "code": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "4548-4",
+              "display": "Hemoglobin A1c/Hemoglobin.total in Blood"
+            }
+          ],
+          "text": "HbA1c"
+        },
+        "subject": {
+          "reference": "Patient/patient-3"
+        },
+        "effectiveDateTime": "2026-08-01T00:00:00Z",
+        "valueQuantity": {
+          "value": 5.4,
+          "unit": "%",
+          "system": "http://unitsofmeasure.org",
+          "code": "%"
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Observation/observation-32"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:418a06ed-28cf-48d1-88f5-f5c109f02164",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "observation-33",
+        "status": "final",
+        "code": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "4548-4",
+              "display": "Hemoglobin A1c/Hemoglobin.total in Blood"
+            }
+          ],
+          "text": "HbA1c"
+        },
+        "subject": {
+          "reference": "Patient/patient-4"
+        },
+        "effectiveDateTime": "2026-09-01T00:00:00Z",
+        "valueQuantity": {
+          "value": 5.8,
+          "unit": "%",
+          "system": "http://unitsofmeasure.org",
+          "code": "%"
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Observation/observation-33"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:786b705a-2295-4e1f-83f2-3ea697086e82",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "observation-34",
+        "status": "final",
+        "code": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "4548-4",
+              "display": "Hemoglobin A1c/Hemoglobin.total in Blood"
+            }
+          ],
+          "text": "HbA1c"
+        },
+        "subject": {
+          "reference": "Patient/patient-5"
+        },
+        "effectiveDateTime": "2026-10-01T00:00:00Z",
+        "valueQuantity": {
+          "value": 6.2,
+          "unit": "%",
+          "system": "http://unitsofmeasure.org",
+          "code": "%"
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Observation/observation-34"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:5164ceec-fa6a-4a88-849c-fae7031ac9c6",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "observation-35",
+        "status": "final",
+        "code": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "4548-4",
+              "display": "Hemoglobin A1c/Hemoglobin.total in Blood"
+            }
+          ],
+          "text": "HbA1c"
+        },
+        "subject": {
+          "reference": "Patient/patient-6"
+        },
+        "effectiveDateTime": "2026-11-01T00:00:00Z",
+        "valueQuantity": {
+          "value": 6.6,
+          "unit": "%",
+          "system": "http://unitsofmeasure.org",
+          "code": "%"
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Observation/observation-35"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:cd9a9811-74a7-4c7d-a492-590cd1c43314",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "observation-36",
+        "status": "final",
+        "code": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "4548-4",
+              "display": "Hemoglobin A1c/Hemoglobin.total in Blood"
+            }
+          ],
+          "text": "HbA1c"
+        },
+        "subject": {
+          "reference": "Patient/patient-7"
+        },
+        "effectiveDateTime": "2026-12-01T00:00:00Z",
+        "valueQuantity": {
+          "value": 7.0,
+          "unit": "%",
+          "system": "http://unitsofmeasure.org",
+          "code": "%"
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Observation/observation-36"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:d7f9d733-4557-4ce8-8a48-59e411e85576",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "observation-37",
+        "status": "final",
+        "code": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "4548-4",
+              "display": "Hemoglobin A1c/Hemoglobin.total in Blood"
+            }
+          ],
+          "text": "HbA1c"
+        },
+        "subject": {
+          "reference": "Patient/patient-8"
+        },
+        "effectiveDateTime": "2026-01-01T00:00:00Z",
+        "valueQuantity": {
+          "value": 7.4,
+          "unit": "%",
+          "system": "http://unitsofmeasure.org",
+          "code": "%"
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Observation/observation-37"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:4bb319a3-6cd4-4e19-9db8-a015d6483320",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "observation-38",
+        "status": "final",
+        "code": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "4548-4",
+              "display": "Hemoglobin A1c/Hemoglobin.total in Blood"
+            }
+          ],
+          "text": "HbA1c"
+        },
+        "subject": {
+          "reference": "Patient/patient-9"
+        },
+        "effectiveDateTime": "2026-02-01T00:00:00Z",
+        "valueQuantity": {
+          "value": 7.8,
+          "unit": "%",
+          "system": "http://unitsofmeasure.org",
+          "code": "%"
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Observation/observation-38"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:ab4e1ce7-9bf3-4ceb-86af-e311f85cafd7",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "observation-39",
+        "status": "final",
+        "code": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "4548-4",
+              "display": "Hemoglobin A1c/Hemoglobin.total in Blood"
+            }
+          ],
+          "text": "HbA1c"
+        },
+        "subject": {
+          "reference": "Patient/patient-10"
+        },
+        "effectiveDateTime": "2026-03-01T00:00:00Z",
+        "valueQuantity": {
+          "value": 8.2,
+          "unit": "%",
+          "system": "http://unitsofmeasure.org",
+          "code": "%"
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Observation/observation-39"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:6b3b702f-6b98-4d58-8c1f-e7854438aaf7",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "observation-40",
+        "status": "final",
+        "code": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "4548-4",
+              "display": "Hemoglobin A1c/Hemoglobin.total in Blood"
+            }
+          ],
+          "text": "HbA1c"
+        },
+        "subject": {
+          "reference": "Patient/patient-1"
+        },
+        "effectiveDateTime": "2026-04-01T00:00:00Z",
+        "valueQuantity": {
+          "value": 5.4,
+          "unit": "%",
+          "system": "http://unitsofmeasure.org",
+          "code": "%"
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Observation/observation-40"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:bdc33bb8-8841-400b-a9d6-ab68ae216a82",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "observation-41",
+        "status": "final",
+        "code": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "4548-4",
+              "display": "Hemoglobin A1c/Hemoglobin.total in Blood"
+            }
+          ],
+          "text": "HbA1c"
+        },
+        "subject": {
+          "reference": "Patient/patient-2"
+        },
+        "effectiveDateTime": "2026-05-01T00:00:00Z",
+        "valueQuantity": {
+          "value": 5.8,
+          "unit": "%",
+          "system": "http://unitsofmeasure.org",
+          "code": "%"
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Observation/observation-41"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:9f1e3883-28de-414c-bfe3-81fbf378e92c",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "observation-42",
+        "status": "final",
+        "code": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "4548-4",
+              "display": "Hemoglobin A1c/Hemoglobin.total in Blood"
+            }
+          ],
+          "text": "HbA1c"
+        },
+        "subject": {
+          "reference": "Patient/patient-3"
+        },
+        "effectiveDateTime": "2026-06-01T00:00:00Z",
+        "valueQuantity": {
+          "value": 6.2,
+          "unit": "%",
+          "system": "http://unitsofmeasure.org",
+          "code": "%"
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Observation/observation-42"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:fb675d79-d9ea-46ed-b386-0548d86163f4",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "observation-43",
+        "status": "final",
+        "code": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "4548-4",
+              "display": "Hemoglobin A1c/Hemoglobin.total in Blood"
+            }
+          ],
+          "text": "HbA1c"
+        },
+        "subject": {
+          "reference": "Patient/patient-4"
+        },
+        "effectiveDateTime": "2026-07-01T00:00:00Z",
+        "valueQuantity": {
+          "value": 6.6,
+          "unit": "%",
+          "system": "http://unitsofmeasure.org",
+          "code": "%"
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Observation/observation-43"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:6773a81e-5909-4457-8d9d-b3628d3c5a76",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "observation-44",
+        "status": "final",
+        "code": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "4548-4",
+              "display": "Hemoglobin A1c/Hemoglobin.total in Blood"
+            }
+          ],
+          "text": "HbA1c"
+        },
+        "subject": {
+          "reference": "Patient/patient-5"
+        },
+        "effectiveDateTime": "2026-08-01T00:00:00Z",
+        "valueQuantity": {
+          "value": 7.0,
+          "unit": "%",
+          "system": "http://unitsofmeasure.org",
+          "code": "%"
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Observation/observation-44"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:c88e4149-dbba-4c6a-ab97-551f4b97fbf2",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "observation-45",
+        "status": "final",
+        "code": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "4548-4",
+              "display": "Hemoglobin A1c/Hemoglobin.total in Blood"
+            }
+          ],
+          "text": "HbA1c"
+        },
+        "subject": {
+          "reference": "Patient/patient-6"
+        },
+        "effectiveDateTime": "2026-09-01T00:00:00Z",
+        "valueQuantity": {
+          "value": 7.4,
+          "unit": "%",
+          "system": "http://unitsofmeasure.org",
+          "code": "%"
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Observation/observation-45"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:1d4bad25-ee65-4e19-9c28-75f5aeba2909",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "observation-46",
+        "status": "final",
+        "code": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "4548-4",
+              "display": "Hemoglobin A1c/Hemoglobin.total in Blood"
+            }
+          ],
+          "text": "HbA1c"
+        },
+        "subject": {
+          "reference": "Patient/patient-7"
+        },
+        "effectiveDateTime": "2026-10-01T00:00:00Z",
+        "valueQuantity": {
+          "value": 7.8,
+          "unit": "%",
+          "system": "http://unitsofmeasure.org",
+          "code": "%"
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Observation/observation-46"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:6c32edb3-58c1-4428-9bf5-6fd5801321a2",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "observation-47",
+        "status": "final",
+        "code": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "4548-4",
+              "display": "Hemoglobin A1c/Hemoglobin.total in Blood"
+            }
+          ],
+          "text": "HbA1c"
+        },
+        "subject": {
+          "reference": "Patient/patient-8"
+        },
+        "effectiveDateTime": "2026-11-01T00:00:00Z",
+        "valueQuantity": {
+          "value": 8.2,
+          "unit": "%",
+          "system": "http://unitsofmeasure.org",
+          "code": "%"
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Observation/observation-47"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:49cd883c-7d28-4293-aae5-ea947c0d303b",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "observation-48",
+        "status": "final",
+        "code": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "4548-4",
+              "display": "Hemoglobin A1c/Hemoglobin.total in Blood"
+            }
+          ],
+          "text": "HbA1c"
+        },
+        "subject": {
+          "reference": "Patient/patient-9"
+        },
+        "effectiveDateTime": "2026-12-01T00:00:00Z",
+        "valueQuantity": {
+          "value": 5.4,
+          "unit": "%",
+          "system": "http://unitsofmeasure.org",
+          "code": "%"
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Observation/observation-48"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:8a7ef142-3f61-44eb-a504-0f39854808af",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "observation-49",
+        "status": "final",
+        "code": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "4548-4",
+              "display": "Hemoglobin A1c/Hemoglobin.total in Blood"
+            }
+          ],
+          "text": "HbA1c"
+        },
+        "subject": {
+          "reference": "Patient/patient-10"
+        },
+        "effectiveDateTime": "2026-01-01T00:00:00Z",
+        "valueQuantity": {
+          "value": 5.8,
+          "unit": "%",
+          "system": "http://unitsofmeasure.org",
+          "code": "%"
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Observation/observation-49"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:65b5f33f-53df-46ba-9284-0f866550dac3",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "observation-50",
+        "status": "final",
+        "code": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "4548-4",
+              "display": "Hemoglobin A1c/Hemoglobin.total in Blood"
+            }
+          ],
+          "text": "HbA1c"
+        },
+        "subject": {
+          "reference": "Patient/patient-1"
+        },
+        "effectiveDateTime": "2026-02-01T00:00:00Z",
+        "valueQuantity": {
+          "value": 6.2,
+          "unit": "%",
+          "system": "http://unitsofmeasure.org",
+          "code": "%"
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Observation/observation-50"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:4668712b-0f4a-4dba-9dc0-4d2166404b04",
+      "resource": {
+        "resourceType": "DiagnosticReport",
+        "id": "diagnostic-report-1",
+        "status": "final",
+        "code": {
+          "text": "Fictional lab panel"
+        },
+        "subject": {
+          "reference": "Patient/patient-1"
+        },
+        "result": [
+          {
+            "reference": "Observation/observation-1"
+          }
+        ]
+      },
+      "request": {
+        "method": "PUT",
+        "url": "DiagnosticReport/diagnostic-report-1"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:bf5dc96a-3edd-4c0b-ae2f-eb3de2affb54",
+      "resource": {
+        "resourceType": "DiagnosticReport",
+        "id": "diagnostic-report-2",
+        "status": "final",
+        "code": {
+          "text": "Fictional lab panel"
+        },
+        "subject": {
+          "reference": "Patient/patient-2"
+        },
+        "result": [
+          {
+            "reference": "Observation/observation-2"
+          }
+        ]
+      },
+      "request": {
+        "method": "PUT",
+        "url": "DiagnosticReport/diagnostic-report-2"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:9d573d47-4ac4-43a8-9e18-d1ad70ea91f6",
+      "resource": {
+        "resourceType": "DiagnosticReport",
+        "id": "diagnostic-report-3",
+        "status": "final",
+        "code": {
+          "text": "Fictional lab panel"
+        },
+        "subject": {
+          "reference": "Patient/patient-3"
+        },
+        "result": [
+          {
+            "reference": "Observation/observation-3"
+          }
+        ]
+      },
+      "request": {
+        "method": "PUT",
+        "url": "DiagnosticReport/diagnostic-report-3"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:1bfe7a73-1251-4132-a31c-88234aed3104",
+      "resource": {
+        "resourceType": "DiagnosticReport",
+        "id": "diagnostic-report-4",
+        "status": "final",
+        "code": {
+          "text": "Fictional lab panel"
+        },
+        "subject": {
+          "reference": "Patient/patient-4"
+        },
+        "result": [
+          {
+            "reference": "Observation/observation-4"
+          }
+        ]
+      },
+      "request": {
+        "method": "PUT",
+        "url": "DiagnosticReport/diagnostic-report-4"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:93ce5106-8739-44ec-a51a-f93b9518a3d1",
+      "resource": {
+        "resourceType": "DiagnosticReport",
+        "id": "diagnostic-report-5",
+        "status": "final",
+        "code": {
+          "text": "Fictional lab panel"
+        },
+        "subject": {
+          "reference": "Patient/patient-5"
+        },
+        "result": [
+          {
+            "reference": "Observation/observation-5"
+          }
+        ]
+      },
+      "request": {
+        "method": "PUT",
+        "url": "DiagnosticReport/diagnostic-report-5"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:64b5ef90-a648-4c3b-97a3-096f010c16f4",
+      "resource": {
+        "resourceType": "DiagnosticReport",
+        "id": "diagnostic-report-6",
+        "status": "final",
+        "code": {
+          "text": "Fictional lab panel"
+        },
+        "subject": {
+          "reference": "Patient/patient-6"
+        },
+        "result": [
+          {
+            "reference": "Observation/observation-6"
+          }
+        ]
+      },
+      "request": {
+        "method": "PUT",
+        "url": "DiagnosticReport/diagnostic-report-6"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:3d348093-55fc-43f4-8ff3-95d281a61b7f",
+      "resource": {
+        "resourceType": "DiagnosticReport",
+        "id": "diagnostic-report-7",
+        "status": "final",
+        "code": {
+          "text": "Fictional lab panel"
+        },
+        "subject": {
+          "reference": "Patient/patient-7"
+        },
+        "result": [
+          {
+            "reference": "Observation/observation-7"
+          }
+        ]
+      },
+      "request": {
+        "method": "PUT",
+        "url": "DiagnosticReport/diagnostic-report-7"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:d7464edc-b073-4c35-8d3b-e8b65cb10e45",
+      "resource": {
+        "resourceType": "DiagnosticReport",
+        "id": "diagnostic-report-8",
+        "status": "final",
+        "code": {
+          "text": "Fictional lab panel"
+        },
+        "subject": {
+          "reference": "Patient/patient-8"
+        },
+        "result": [
+          {
+            "reference": "Observation/observation-8"
+          }
+        ]
+      },
+      "request": {
+        "method": "PUT",
+        "url": "DiagnosticReport/diagnostic-report-8"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:4c508807-ffa1-486e-9da9-3ee1ba4f37b1",
+      "resource": {
+        "resourceType": "DiagnosticReport",
+        "id": "diagnostic-report-9",
+        "status": "final",
+        "code": {
+          "text": "Fictional lab panel"
+        },
+        "subject": {
+          "reference": "Patient/patient-9"
+        },
+        "result": [
+          {
+            "reference": "Observation/observation-9"
+          }
+        ]
+      },
+      "request": {
+        "method": "PUT",
+        "url": "DiagnosticReport/diagnostic-report-9"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:2c838308-8c63-4eb1-87b3-b1d62663d4b7",
+      "resource": {
+        "resourceType": "DiagnosticReport",
+        "id": "diagnostic-report-10",
+        "status": "final",
+        "code": {
+          "text": "Fictional lab panel"
+        },
+        "subject": {
+          "reference": "Patient/patient-10"
+        },
+        "result": [
+          {
+            "reference": "Observation/observation-10"
+          }
+        ]
+      },
+      "request": {
+        "method": "PUT",
+        "url": "DiagnosticReport/diagnostic-report-10"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:76c499f9-f57a-4bc1-a1b4-af42fbb45736",
+      "resource": {
+        "resourceType": "Condition",
+        "id": "condition-1",
+        "clinicalStatus": {
+          "coding": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/condition-clinical",
+              "code": "active"
+            }
+          ]
+        },
+        "code": {
+          "text": "Fictional coded condition"
+        },
+        "subject": {
+          "reference": "Patient/patient-1"
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Condition/condition-1"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:279b4382-fd98-4a8d-a2ce-f329f86fd1eb",
+      "resource": {
+        "resourceType": "Condition",
+        "id": "condition-2",
+        "clinicalStatus": {
+          "coding": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/condition-clinical",
+              "code": "active"
+            }
+          ]
+        },
+        "code": {
+          "text": "Fictional coded condition"
+        },
+        "subject": {
+          "reference": "Patient/patient-2"
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Condition/condition-2"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:b9dfb59a-6cbd-4caa-ad12-285165c4da10",
+      "resource": {
+        "resourceType": "Condition",
+        "id": "condition-3",
+        "clinicalStatus": {
+          "coding": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/condition-clinical",
+              "code": "active"
+            }
+          ]
+        },
+        "code": {
+          "text": "Fictional coded condition"
+        },
+        "subject": {
+          "reference": "Patient/patient-3"
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Condition/condition-3"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:178fd9f1-d811-4066-ac94-c2d93fefdf2a",
+      "resource": {
+        "resourceType": "Condition",
+        "id": "condition-4",
+        "clinicalStatus": {
+          "coding": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/condition-clinical",
+              "code": "active"
+            }
+          ]
+        },
+        "code": {
+          "text": "Fictional coded condition"
+        },
+        "subject": {
+          "reference": "Patient/patient-4"
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Condition/condition-4"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:966220ad-0005-4816-b893-215383712420",
+      "resource": {
+        "resourceType": "Condition",
+        "id": "condition-5",
+        "clinicalStatus": {
+          "coding": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/condition-clinical",
+              "code": "active"
+            }
+          ]
+        },
+        "code": {
+          "text": "Fictional coded condition"
+        },
+        "subject": {
+          "reference": "Patient/patient-5"
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Condition/condition-5"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:d24ff054-2252-4ccb-be09-7f8a405ae87a",
+      "resource": {
+        "resourceType": "AllergyIntolerance",
+        "id": "allergy-1",
+        "clinicalStatus": {
+          "coding": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/allergyintolerance-clinical",
+              "code": "active"
+            }
+          ]
+        },
+        "code": {
+          "text": "Fictional allergy"
+        },
+        "patient": {
+          "reference": "Patient/patient-1"
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "AllergyIntolerance/allergy-1"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:4b97d74a-0003-42d6-bab3-99135ee80bc0",
+      "resource": {
+        "resourceType": "AllergyIntolerance",
+        "id": "allergy-2",
+        "clinicalStatus": {
+          "coding": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/allergyintolerance-clinical",
+              "code": "active"
+            }
+          ]
+        },
+        "code": {
+          "text": "Fictional allergy"
+        },
+        "patient": {
+          "reference": "Patient/patient-2"
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "AllergyIntolerance/allergy-2"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:4ad37537-15c6-4cf6-9034-a1fd6689e86b",
+      "resource": {
+        "resourceType": "AllergyIntolerance",
+        "id": "allergy-3",
+        "clinicalStatus": {
+          "coding": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/allergyintolerance-clinical",
+              "code": "active"
+            }
+          ]
+        },
+        "code": {
+          "text": "Fictional allergy"
+        },
+        "patient": {
+          "reference": "Patient/patient-3"
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "AllergyIntolerance/allergy-3"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:543419d9-cd3c-46b9-839b-1cf2344b381c",
+      "resource": {
+        "resourceType": "AllergyIntolerance",
+        "id": "allergy-4",
+        "clinicalStatus": {
+          "coding": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/allergyintolerance-clinical",
+              "code": "active"
+            }
+          ]
+        },
+        "code": {
+          "text": "Fictional allergy"
+        },
+        "patient": {
+          "reference": "Patient/patient-4"
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "AllergyIntolerance/allergy-4"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:f53c31fc-8d71-42e5-abe3-a1147dbcaf11",
+      "resource": {
+        "resourceType": "AllergyIntolerance",
+        "id": "allergy-5",
+        "clinicalStatus": {
+          "coding": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/allergyintolerance-clinical",
+              "code": "active"
+            }
+          ]
+        },
+        "code": {
+          "text": "Fictional allergy"
+        },
+        "patient": {
+          "reference": "Patient/patient-5"
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "AllergyIntolerance/allergy-5"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:fe5f17c7-36ae-4282-842d-65f47f128ebf",
+      "resource": {
+        "resourceType": "MedicationRequest",
+        "id": "medication-request-1",
+        "status": "active",
+        "intent": "order",
+        "medicationCodeableConcept": {
+          "text": "Fictional medication"
+        },
+        "subject": {
+          "reference": "Patient/patient-2"
+        },
+        "requester": {
+          "reference": "Practitioner/practitioner-1"
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "MedicationRequest/medication-request-1"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:36b5175f-0dec-4805-b5e9-2e96bf6b8b1e",
+      "resource": {
+        "resourceType": "MedicationRequest",
+        "id": "medication-request-2",
+        "status": "active",
+        "intent": "order",
+        "medicationCodeableConcept": {
+          "text": "Fictional medication"
+        },
+        "subject": {
+          "reference": "Patient/patient-3"
+        },
+        "requester": {
+          "reference": "Practitioner/practitioner-1"
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "MedicationRequest/medication-request-2"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:b2ae4d8b-eed3-4a44-ba56-e8900dab12fa",
+      "resource": {
+        "resourceType": "MedicationRequest",
+        "id": "medication-request-3",
+        "status": "active",
+        "intent": "order",
+        "medicationCodeableConcept": {
+          "text": "Fictional medication"
+        },
+        "subject": {
+          "reference": "Patient/patient-4"
+        },
+        "requester": {
+          "reference": "Practitioner/practitioner-1"
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "MedicationRequest/medication-request-3"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:2a84bcdc-2383-4a66-b2fd-de51495e8b6a",
+      "resource": {
+        "resourceType": "MedicationRequest",
+        "id": "medication-request-4",
+        "status": "active",
+        "intent": "order",
+        "medicationCodeableConcept": {
+          "text": "Fictional medication"
+        },
+        "subject": {
+          "reference": "Patient/patient-5"
+        },
+        "requester": {
+          "reference": "Practitioner/practitioner-1"
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "MedicationRequest/medication-request-4"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:3ea4ccd6-fa6f-4ea8-8240-d68b732ba926",
+      "resource": {
+        "resourceType": "MedicationRequest",
+        "id": "medication-request-5",
+        "status": "active",
+        "intent": "order",
+        "medicationCodeableConcept": {
+          "text": "Fictional medication"
+        },
+        "subject": {
+          "reference": "Patient/patient-6"
+        },
+        "requester": {
+          "reference": "Practitioner/practitioner-1"
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "MedicationRequest/medication-request-5"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:d1ae55bc-3220-4e7a-85f3-7ab312373892",
+      "resource": {
+        "resourceType": "MedicationRequest",
+        "id": "medication-request-6",
+        "status": "active",
+        "intent": "order",
+        "medicationCodeableConcept": {
+          "text": "Fictional medication"
+        },
+        "subject": {
+          "reference": "Patient/patient-7"
+        },
+        "requester": {
+          "reference": "Practitioner/practitioner-1"
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "MedicationRequest/medication-request-6"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:f18a7294-3b4b-414e-a11b-434377a80fb0",
+      "resource": {
+        "resourceType": "MedicationRequest",
+        "id": "medication-request-7",
+        "status": "active",
+        "intent": "order",
+        "medicationCodeableConcept": {
+          "text": "Fictional medication"
+        },
+        "subject": {
+          "reference": "Patient/patient-8"
+        },
+        "requester": {
+          "reference": "Practitioner/practitioner-1"
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "MedicationRequest/medication-request-7"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:9b744e08-7fbd-4fe2-829f-3f1a3dc8b04c",
+      "resource": {
+        "resourceType": "MedicationRequest",
+        "id": "medication-request-8",
+        "status": "active",
+        "intent": "order",
+        "medicationCodeableConcept": {
+          "text": "Fictional medication"
+        },
+        "subject": {
+          "reference": "Patient/patient-9"
+        },
+        "requester": {
+          "reference": "Practitioner/practitioner-1"
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "MedicationRequest/medication-request-8"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:ce275bf9-feb8-49ec-a97a-0dd9952ee52a",
+      "resource": {
+        "resourceType": "MedicationRequest",
+        "id": "medication-request-9",
+        "status": "active",
+        "intent": "order",
+        "medicationCodeableConcept": {
+          "text": "Fictional medication"
+        },
+        "subject": {
+          "reference": "Patient/patient-10"
+        },
+        "requester": {
+          "reference": "Practitioner/practitioner-1"
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "MedicationRequest/medication-request-9"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:67931124-024f-4f98-8af8-c7ecaee97bd4",
+      "resource": {
+        "resourceType": "MedicationRequest",
+        "id": "medication-request-10",
+        "status": "active",
+        "intent": "order",
+        "medicationCodeableConcept": {
+          "text": "Fictional medication"
+        },
+        "subject": {
+          "reference": "Patient/patient-1"
+        },
+        "requester": {
+          "reference": "Practitioner/practitioner-1"
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "MedicationRequest/medication-request-10"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:c981a0da-77e0-410b-bd7e-c0ceb935e1af",
+      "resource": {
+        "resourceType": "Appointment",
+        "id": "appointment-1",
+        "status": "booked",
+        "start": "2026-08-01T14:00:00Z",
+        "participant": [
+          {
+            "actor": {
+              "reference": "Patient/patient-2"
+            },
+            "status": "accepted"
+          }
+        ]
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Appointment/appointment-1"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:37679216-5806-4a85-be6c-4272c55f914c",
+      "resource": {
+        "resourceType": "Appointment",
+        "id": "appointment-2",
+        "status": "booked",
+        "start": "2026-08-02T14:00:00Z",
+        "participant": [
+          {
+            "actor": {
+              "reference": "Patient/patient-3"
+            },
+            "status": "accepted"
+          }
+        ]
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Appointment/appointment-2"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:038f8deb-ec56-44f9-8265-af6c73d093fc",
+      "resource": {
+        "resourceType": "Appointment",
+        "id": "appointment-3",
+        "status": "booked",
+        "start": "2026-08-03T14:00:00Z",
+        "participant": [
+          {
+            "actor": {
+              "reference": "Patient/patient-4"
+            },
+            "status": "accepted"
+          }
+        ]
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Appointment/appointment-3"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:a383a5b7-8e72-473f-91b2-4ad1931a38ca",
+      "resource": {
+        "resourceType": "Appointment",
+        "id": "appointment-4",
+        "status": "booked",
+        "start": "2026-08-04T14:00:00Z",
+        "participant": [
+          {
+            "actor": {
+              "reference": "Patient/patient-5"
+            },
+            "status": "accepted"
+          }
+        ]
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Appointment/appointment-4"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:65f15492-8c4b-419b-8320-62aa6e563d91",
+      "resource": {
+        "resourceType": "Appointment",
+        "id": "appointment-5",
+        "status": "booked",
+        "start": "2026-08-05T14:00:00Z",
+        "participant": [
+          {
+            "actor": {
+              "reference": "Patient/patient-6"
+            },
+            "status": "accepted"
+          }
+        ]
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Appointment/appointment-5"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:1888cea3-4b9e-42e5-937c-94f6ce79efa3",
+      "resource": {
+        "resourceType": "Appointment",
+        "id": "appointment-6",
+        "status": "booked",
+        "start": "2026-08-06T14:00:00Z",
+        "participant": [
+          {
+            "actor": {
+              "reference": "Patient/patient-7"
+            },
+            "status": "accepted"
+          }
+        ]
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Appointment/appointment-6"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:36d4f247-772e-45ff-8ddd-a736e32fbe45",
+      "resource": {
+        "resourceType": "Appointment",
+        "id": "appointment-7",
+        "status": "booked",
+        "start": "2026-08-07T14:00:00Z",
+        "participant": [
+          {
+            "actor": {
+              "reference": "Patient/patient-8"
+            },
+            "status": "accepted"
+          }
+        ]
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Appointment/appointment-7"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:b42cc866-0f89-4660-8709-d3566bcfc303",
+      "resource": {
+        "resourceType": "Appointment",
+        "id": "appointment-8",
+        "status": "booked",
+        "start": "2026-08-08T14:00:00Z",
+        "participant": [
+          {
+            "actor": {
+              "reference": "Patient/patient-9"
+            },
+            "status": "accepted"
+          }
+        ]
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Appointment/appointment-8"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:fe9cd63a-65ce-4cc7-8e3f-124ad7f32660",
+      "resource": {
+        "resourceType": "Appointment",
+        "id": "appointment-9",
+        "status": "booked",
+        "start": "2026-08-09T14:00:00Z",
+        "participant": [
+          {
+            "actor": {
+              "reference": "Patient/patient-10"
+            },
+            "status": "accepted"
+          }
+        ]
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Appointment/appointment-9"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:ed6880bb-0147-4f19-8895-120c2a91ba2d",
+      "resource": {
+        "resourceType": "Appointment",
+        "id": "appointment-10",
+        "status": "booked",
+        "start": "2026-08-10T14:00:00Z",
+        "participant": [
+          {
+            "actor": {
+              "reference": "Patient/patient-1"
+            },
+            "status": "accepted"
+          }
+        ]
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Appointment/appointment-10"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:b09c5211-12b5-476d-adc5-513d3e1666c2",
+      "resource": {
+        "resourceType": "Task",
+        "id": "task-1",
+        "status": "requested",
+        "intent": "order",
+        "description": "Fictional follow-up task",
+        "for": {
+          "reference": "Patient/patient-2"
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Task/task-1"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:02563690-42dc-4b00-90ff-8c03906b6461",
+      "resource": {
+        "resourceType": "Task",
+        "id": "task-2",
+        "status": "requested",
+        "intent": "order",
+        "description": "Fictional follow-up task",
+        "for": {
+          "reference": "Patient/patient-3"
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Task/task-2"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:2d53b350-5100-4d6e-a3e3-d039ddd81fbb",
+      "resource": {
+        "resourceType": "Task",
+        "id": "task-3",
+        "status": "requested",
+        "intent": "order",
+        "description": "Fictional follow-up task",
+        "for": {
+          "reference": "Patient/patient-4"
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Task/task-3"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:b9e6802e-4c83-4a51-9a26-7d8ed39e661c",
+      "resource": {
+        "resourceType": "Task",
+        "id": "task-4",
+        "status": "requested",
+        "intent": "order",
+        "description": "Fictional follow-up task",
+        "for": {
+          "reference": "Patient/patient-5"
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Task/task-4"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:20c5be01-228a-44e2-9beb-68a19b02222b",
+      "resource": {
+        "resourceType": "Task",
+        "id": "task-5",
+        "status": "requested",
+        "intent": "order",
+        "description": "Fictional follow-up task",
+        "for": {
+          "reference": "Patient/patient-6"
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Task/task-5"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:cb55fe9d-a15b-4abc-90fd-7427e722d33d",
+      "resource": {
+        "resourceType": "Task",
+        "id": "task-6",
+        "status": "requested",
+        "intent": "order",
+        "description": "Fictional follow-up task",
+        "for": {
+          "reference": "Patient/patient-7"
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Task/task-6"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:b5f88373-3e99-4aa3-b47a-6b0251109b96",
+      "resource": {
+        "resourceType": "Task",
+        "id": "task-7",
+        "status": "requested",
+        "intent": "order",
+        "description": "Fictional follow-up task",
+        "for": {
+          "reference": "Patient/patient-8"
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Task/task-7"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:08cb6e23-83aa-453a-909e-13e789e86578",
+      "resource": {
+        "resourceType": "Task",
+        "id": "task-8",
+        "status": "requested",
+        "intent": "order",
+        "description": "Fictional follow-up task",
+        "for": {
+          "reference": "Patient/patient-9"
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Task/task-8"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:ad1a6e35-4243-4ba3-a724-700350af5457",
+      "resource": {
+        "resourceType": "Task",
+        "id": "task-9",
+        "status": "requested",
+        "intent": "order",
+        "description": "Fictional follow-up task",
+        "for": {
+          "reference": "Patient/patient-10"
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Task/task-9"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:379966db-c650-4f8e-bca9-7fe8d9d0637e",
+      "resource": {
+        "resourceType": "Task",
+        "id": "task-10",
+        "status": "requested",
+        "intent": "order",
+        "description": "Fictional follow-up task",
+        "for": {
+          "reference": "Patient/patient-1"
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Task/task-10"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:a8a99110-30f0-40f0-9b9e-5b2b32ec4c66",
+      "resource": {
+        "resourceType": "CarePlan",
+        "id": "careplan-1",
+        "status": "active",
+        "intent": "plan",
+        "subject": {
+          "reference": "Patient/patient-1"
+        },
+        "title": "Fictional care plan"
+      },
+      "request": {
+        "method": "PUT",
+        "url": "CarePlan/careplan-1"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:cf16b439-64c5-4277-b29c-da67ff058bcc",
+      "resource": {
+        "resourceType": "CarePlan",
+        "id": "careplan-2",
+        "status": "active",
+        "intent": "plan",
+        "subject": {
+          "reference": "Patient/patient-2"
+        },
+        "title": "Fictional care plan"
+      },
+      "request": {
+        "method": "PUT",
+        "url": "CarePlan/careplan-2"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:dfcf767d-713b-4219-aa6e-d006dc3d966d",
+      "resource": {
+        "resourceType": "CarePlan",
+        "id": "careplan-3",
+        "status": "active",
+        "intent": "plan",
+        "subject": {
+          "reference": "Patient/patient-3"
+        },
+        "title": "Fictional care plan"
+      },
+      "request": {
+        "method": "PUT",
+        "url": "CarePlan/careplan-3"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:f7b7f4b0-ef69-464b-9f0c-104b9a3fe70a",
+      "resource": {
+        "resourceType": "Questionnaire",
+        "id": "questionnaire-1",
+        "status": "active",
+        "title": "Fictional Questionnaire 1",
+        "item": [
+          {
+            "linkId": "q1",
+            "text": "Fictional question",
+            "type": "string"
+          }
+        ]
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Questionnaire/questionnaire-1"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:52263e4b-35cb-4cfd-b4d3-d715dcfa4525",
+      "resource": {
+        "resourceType": "Questionnaire",
+        "id": "questionnaire-2",
+        "status": "active",
+        "title": "Fictional Questionnaire 2",
+        "item": [
+          {
+            "linkId": "q1",
+            "text": "Fictional question",
+            "type": "string"
+          }
+        ]
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Questionnaire/questionnaire-2"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:dd5e9bdd-9ac5-44c8-a6f8-c24fb5e942ee",
+      "resource": {
+        "resourceType": "Questionnaire",
+        "id": "questionnaire-3",
+        "status": "active",
+        "title": "Fictional Questionnaire 3",
+        "item": [
+          {
+            "linkId": "q1",
+            "text": "Fictional question",
+            "type": "string"
+          }
+        ]
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Questionnaire/questionnaire-3"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:0047ccb6-5c08-4755-bed1-bb7bb411b0a9",
+      "resource": {
+        "resourceType": "QuestionnaireResponse",
+        "id": "questionnaire-response-1",
+        "status": "completed",
+        "questionnaire": "Questionnaire/questionnaire-1",
+        "subject": {
+          "reference": "Patient/patient-1"
+        },
+        "item": [
+          {
+            "linkId": "q1",
+            "answer": [
+              {
+                "valueString": "Fictional answer"
+              }
+            ]
+          }
+        ]
+      },
+      "request": {
+        "method": "PUT",
+        "url": "QuestionnaireResponse/questionnaire-response-1"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:f2249258-e80d-45fa-8a72-ffa74487ee2a",
+      "resource": {
+        "resourceType": "QuestionnaireResponse",
+        "id": "questionnaire-response-2",
+        "status": "completed",
+        "questionnaire": "Questionnaire/questionnaire-2",
+        "subject": {
+          "reference": "Patient/patient-2"
+        },
+        "item": [
+          {
+            "linkId": "q1",
+            "answer": [
+              {
+                "valueString": "Fictional answer"
+              }
+            ]
+          }
+        ]
+      },
+      "request": {
+        "method": "PUT",
+        "url": "QuestionnaireResponse/questionnaire-response-2"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:25b31345-3177-4895-8261-2e0cbe35b18e",
+      "resource": {
+        "resourceType": "QuestionnaireResponse",
+        "id": "questionnaire-response-3",
+        "status": "completed",
+        "questionnaire": "Questionnaire/questionnaire-3",
+        "subject": {
+          "reference": "Patient/patient-3"
+        },
+        "item": [
+          {
+            "linkId": "q1",
+            "answer": [
+              {
+                "valueString": "Fictional answer"
+              }
+            ]
+          }
+        ]
+      },
+      "request": {
+        "method": "PUT",
+        "url": "QuestionnaireResponse/questionnaire-response-3"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:350dd668-4422-42f8-8296-8413f7fb49b1",
+      "resource": {
+        "resourceType": "PlanDefinition",
+        "id": "plan-definition-1",
+        "status": "active",
+        "name": "FictionalPlanDefinition1",
+        "title": "Fictional deterministic review plan"
+      },
+      "request": {
+        "method": "PUT",
+        "url": "PlanDefinition/plan-definition-1"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:d98caf90-f4c9-402f-901f-3af023665751",
+      "resource": {
+        "resourceType": "PlanDefinition",
+        "id": "plan-definition-2",
+        "status": "active",
+        "name": "FictionalPlanDefinition2",
+        "title": "Fictional deterministic review plan"
+      },
+      "request": {
+        "method": "PUT",
+        "url": "PlanDefinition/plan-definition-2"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:0ab87f54-edb8-4e12-9d00-d28409f08e30",
+      "resource": {
+        "resourceType": "Library",
+        "id": "library-1",
+        "status": "active",
+        "type": {
+          "coding": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/library-type",
+              "code": "logic-library"
+            }
+          ]
+        },
+        "name": "FictionalLibrary1"
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Library/library-1"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:ae5bff30-027c-48d5-9d20-d54b0e8927a9",
+      "resource": {
+        "resourceType": "Library",
+        "id": "library-2",
+        "status": "active",
+        "type": {
+          "coding": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/library-type",
+              "code": "logic-library"
+            }
+          ]
+        },
+        "name": "FictionalLibrary2"
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Library/library-2"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:78e51793-b55b-4052-abcd-9a1cdf0427d4",
+      "resource": {
+        "resourceType": "Measure",
+        "id": "measure-1",
+        "status": "active",
+        "name": "FictionalMeasure1",
+        "scoring": {
+          "coding": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/measure-scoring",
+              "code": "proportion"
+            }
+          ]
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Measure/measure-1"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:8b49ba0b-58cf-4fe9-aeec-2facf454299d",
+      "resource": {
+        "resourceType": "Measure",
+        "id": "measure-2",
+        "status": "active",
+        "name": "FictionalMeasure2",
+        "scoring": {
+          "coding": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/measure-scoring",
+              "code": "proportion"
+            }
+          ]
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Measure/measure-2"
+      }
+    }
+  ]
+}

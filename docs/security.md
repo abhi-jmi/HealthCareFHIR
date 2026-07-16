@@ -13,3 +13,9 @@ The application database stores correlation IDs and FHIR AuditEvent references r
 ## Level 2 security and privacy support
 
 Level 2 API policies are generated from explicit permissions and are enforced in controllers, not by UI visibility. AuditEvent creation is routed through the custom API and persisted through FHIR REST so the FHIR server remains the clinical/audit system of record. Application SQL stores only operational correlation metadata and registry/configuration data.
+
+## Implemented hardening update
+
+The API and web application now add secure response headers, HTTPS redirection, HSTS outside development, antiforgery for the Blazor server app, global API rate limiting, and a configurable maximum request body size (`Security:MaxRequestBodyBytes`). API request logging enriches correlation metadata without logging request bodies or full PHI-bearing query payloads. `IPhiRedactionService` centralizes redaction patterns for email addresses, SSNs, MRN values, and phone numbers so future workflow-specific logs can sanitize text before writing structured events.
+
+Production deployments must still provide real TLS certificates, private networking, secret injection from a managed vault, malware scanning implementation for uploaded binary content, and organization-specific consent/break-glass operating procedures.

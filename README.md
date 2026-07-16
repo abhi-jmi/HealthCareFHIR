@@ -60,3 +60,21 @@ The `/fhir-levels` UI route and `/api/fhir-levels` API expose the Level 1-5 map 
 ## Optional HL7 FHIR projection tables
 
 For local schema visibility, the Infrastructure project includes EF Core models and `DbSet` properties for the FHIR resource types in the Level 1-5 catalog. Docker Compose runs `deploy/sql/003_hl7_fhir_projection_schema.sql` after the operational database initialization so these optional projection tables are visible in `FhirPlatform`. Microsoft FHIR Server remains the canonical clinical database; these projection tables are not a replacement for FHIR REST persistence.
+
+
+## Current production-readiness additions
+
+- Typed workflow pages are available for Patient (`/patients`), Practitioner (`/practitioners`), Organization (`/organizations`), Location (`/locations`), Clinical (`/clinical`), Diagnostics (`/diagnostics`), Medications (`/medications`), Workflow (`/workflow`), Financial (`/financial`), and Clinical Reasoning (`/clinical-reasoning`).
+- API hardening includes secure headers, HTTPS redirection, configurable request-size limit, global rate limiting, OIDC/JWT policy authorization, and PHI-safe structured logging boundaries.
+- Observability includes Serilog request logging, health endpoints, SQL/FHIR health checks, and OpenTelemetry tracing/metrics with OTLP export.
+- Complete fictional development seed data is provided at `seed/fhir/complete-development-seed-bundle.json` and includes the requested counts for patients, practitioners, organizations, locations, observations, diagnostic reports, conditions, allergies, medication requests, appointments, tasks, care plans, questionnaires, questionnaire responses, plan definitions, libraries, and measures.
+- Azure production infrastructure starts from `deploy/azure/main.bicep` for Container Apps, Azure SQL, Log Analytics, and Application Insights.
+
+### Verification commands
+
+Run these in an environment with .NET 9 SDK and Docker installed:
+
+```bash
+dotnet build FhirPlatform.sln
+docker compose up --build
+```

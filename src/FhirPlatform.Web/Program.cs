@@ -1,3 +1,4 @@
+using FhirPlatform.Web;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 
@@ -8,6 +9,8 @@ builder.Services.AddAuthentication(o => { o.DefaultScheme = CookieAuthentication
 builder.Services.AddAuthorization();
 var app = builder.Build();
 if (!app.Environment.IsDevelopment()) { app.UseExceptionHandler("/Error"); app.UseHsts(); }
+app.UseMiddleware<SecurityHeadersMiddleware>();
+app.UseHttpsRedirection();
 app.UseStaticFiles(); app.UseAntiforgery(); app.UseAuthentication(); app.UseAuthorization();
 app.MapRazorComponents<App>().AddInteractiveServerRenderMode();
 app.Run();
