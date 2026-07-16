@@ -1,0 +1,10 @@
+@using Hl7.Fhir.Model
+@if (Narrative is null || string.IsNullOrWhiteSpace(Narrative.Div))
+{
+    <div class="text-muted">No narrative</div>
+}
+else
+{
+    <iframe title="FHIR narrative preview" class="w-100 border rounded" style="min-height: 12rem" srcdoc="@Narrative.Div"></iframe>
+}
+@code { [Parameter] public Narrative? Narrative { get; set; } }

@@ -1,0 +1,10 @@
+@using Hl7.Fhir.Model
+@if (Coding is null)
+{
+    <span class="text-muted">No coding</span>
+}
+else
+{
+    <span title="@Coding.System"><strong>@(Coding.Display ?? Coding.Code)</strong> <code>@Coding.Code</code></span>
+}
+@code { [Parameter] public Coding? Coding { get; set; } }

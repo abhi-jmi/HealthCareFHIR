@@ -1,0 +1,21 @@
+@using Hl7.Fhir.Model
+@if (Attachment is null)
+{
+    <span class="text-muted">No attachment</span>
+}
+else
+{
+    <div>
+        <strong>@(Attachment.Title ?? Attachment.ContentType ?? "Attachment")</strong>
+        <span class="text-muted">@Attachment.ContentType</span>
+        @if (!string.IsNullOrWhiteSpace(Attachment.Url))
+        {
+            <a class="ms-2" href="@Attachment.Url" target="_blank" rel="noopener noreferrer">Open</a>
+        }
+        @if (Attachment.Size.HasValue)
+        {
+            <span class="ms-2">@Attachment.Size bytes</span>
+        }
+    </div>
+}
+@code { [Parameter] public Attachment? Attachment { get; set; } }
