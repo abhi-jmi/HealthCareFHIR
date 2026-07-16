@@ -1,0 +1,31 @@
+@page "/api-explorer"
+@using System.Net.Http.Json
+@using FhirPlatform.Application.Contracts
+@inject IHttpClientFactory HttpClientFactory
+
+<h2>FHIR API Explorer</h2>
+<p>The explorer is constrained to supported FHIR resource types and calls the custom API layer instead of accepting arbitrary external URLs.</p>
+<div class="row g-3">
+    <div class="col-md-3"><label class="form-label">Resource type</label><input class="form-control" @bind="_resourceType" /></div>
+    <div class="col-md-3"><label class="form-label">Interaction</label><select class="form-select" @bind="_interaction"><option>search</option><option>read</option></select></div>
+    <div class="col-md-3"><label class="form-label">Id</label><input class="form-control" @bind="_id" /></div>
+    <div class="col-md-3"><label class="form-label">Format</label><select class="form-select" @bind="_format"><option>json</option><option>xml</option></select></div>
+</div>
+<button class="btn btn-primary mt-3" @onclick="SendAsync">Send</button>
+@if (_response is not null)
+{
+    <RawResourceViewer Title="FHIR response" Format="@_response.ContentType" Content="@_response.Body" />
+}
+@code {
+    private string _resourceType = "Patient";
+    private string _interaction = "search";
+    private string? _id;
+    private string _format = "json";
+    private FhirExplorerResponse? _response;
+    private async Task SendAsync()
+    {
+        var client = HttpClientFactory.CreateClient("Api");
+        var response = await client.PostAsJsonAsync("api/fhir-explorer/execute", new FhirExplorerRequest(_resourceType, _interaction, _id, new Dictionary<string, string?> { ["_count"] = "10" }, _format));
+        _response = response.IsSuccessStatusCode ? await response.Content.ReadFromJsonAsync<FhirExplorerResponse>() : new FhirExplorerResponse((int)response.StatusCode, _resourceType, _interaction, "text/plain", await response.Content.ReadAsStringAsync(), new Dictionary<string, string>());
+    }
+}

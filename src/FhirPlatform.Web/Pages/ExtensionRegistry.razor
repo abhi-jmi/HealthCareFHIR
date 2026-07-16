@@ -1,0 +1,79 @@
+@page "/administration/extensions"
+@using System.Net.Http.Json
+@using FhirPlatform.Application.Contracts
+@inject IHttpClientFactory HttpClientFactory
+
+<h2>Extension Registry</h2>
+<p class="text-muted">Register approved custom FHIR extensions so validation and business workflows do not silently accept unknown custom extensions.</p>
+
+<div class="card mb-4">
+    <div class="card-body">
+        <div class="row g-3">
+            <div class="col-md-6"><label class="form-label">Canonical URL</label><input class="form-control" @bind="_canonicalUrl" /></div>
+            <div class="col-md-6"><label class="form-label">Name</label><input class="form-control" @bind="_name" /></div>
+            <div class="col-md-6"><label class="form-label">Applicable resource types</label><input class="form-control" @bind="_resourceTypes" placeholder="Patient,Observation or *" /></div>
+            <div class="col-md-6"><label class="form-label">Value type</label><input class="form-control" @bind="_valueType" placeholder="string, CodeableConcept, Quantity" /></div>
+            <div class="col-12"><label class="form-label">Description</label><textarea class="form-control" @bind="_description"></textarea></div>
+        </div>
+        <button class="btn btn-primary mt-3" @onclick="CreateAsync">Register extension</button>
+    </div>
+</div>
+
+@if (_entries.Count == 0)
+{
+    <p class="text-muted">No extension registry entries loaded.</p>
+}
+else
+{
+    <table class="table table-striped">
+        <thead><tr><th>Name</th><th>Canonical URL</th><th>Resources</th><th>Value</th><th>Status</th><th>Actions</th></tr></thead>
+        <tbody>
+        @foreach (var entry in _entries)
+        {
+            <tr><td>@entry.Name</td><td><code>@entry.CanonicalUrl</code></td><td>@string.Join(", ", entry.ApplicableResourceTypes)</td><td>@entry.ValueType</td><td>@(entry.Active ? "Active" : "Inactive")</td><td><button class="btn btn-sm btn-outline-secondary" @onclick="() => ToggleActiveAsync(entry)">Toggle active</button> <button class="btn btn-sm btn-outline-danger" @onclick="() => DeleteAsync(entry.Id)">Delete</button></td></tr>
+        }
+        </tbody>
+    </table>
+}
+
+@code {
+    private readonly List<ExtensionRegistryEntryDto> _entries = new();
+    private string _canonicalUrl = "";
+    private string _name = "";
+    private string _description = "";
+    private string _resourceTypes = "Patient";
+    private string _valueType = "string";
+
+    protected override async Task OnInitializedAsync() => await LoadAsync();
+
+    private async Task LoadAsync()
+    {
+        var client = HttpClientFactory.CreateClient("Api");
+        var entries = await client.GetFromJsonAsync<IReadOnlyList<ExtensionRegistryEntryDto>>("api/administration/extensions");
+        _entries.Clear();
+        _entries.AddRange(entries ?? Array.Empty<ExtensionRegistryEntryDto>());
+    }
+
+    private async Task CreateAsync()
+    {
+        var client = HttpClientFactory.CreateClient("Api");
+        var request = new UpsertExtensionRegistryEntryRequest(_canonicalUrl, _name, _description, _resourceTypes.Split(',', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries), _valueType);
+        var response = await client.PostAsJsonAsync("api/administration/extensions", request);
+        if (response.IsSuccessStatusCode) await LoadAsync();
+    }
+
+    private async Task ToggleActiveAsync(ExtensionRegistryEntryDto entry)
+    {
+        var client = HttpClientFactory.CreateClient("Api");
+        var request = new UpsertExtensionRegistryEntryRequest(entry.CanonicalUrl, entry.Name, entry.Description, entry.ApplicableResourceTypes, entry.ValueType, !entry.Active);
+        var response = await client.PutAsJsonAsync($"api/administration/extensions/{entry.Id}", request);
+        if (response.IsSuccessStatusCode) await LoadAsync();
+    }
+
+    private async Task DeleteAsync(Guid id)
+    {
+        var client = HttpClientFactory.CreateClient("Api");
+        var response = await client.DeleteAsync($"api/administration/extensions/{id}");
+        if (response.IsSuccessStatusCode) await LoadAsync();
+    }
+}
