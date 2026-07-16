@@ -1,7 +1,10 @@
 namespace FhirPlatform.Api;
 
+/// <summary>Adds baseline browser security headers to API responses.</summary>
+/// <param name="next">The next middleware in the request pipeline.</param>
 public sealed class SecurityHeadersMiddleware(RequestDelegate next)
 {
+    /// <summary>Adds security response headers before passing the request to the next middleware.</summary>
     public async Task InvokeAsync(HttpContext context)
     {
         context.Response.OnStarting(() =>

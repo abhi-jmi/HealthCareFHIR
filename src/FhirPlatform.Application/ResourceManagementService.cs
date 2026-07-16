@@ -15,26 +15,25 @@ public interface IResourceManagementService
 
 public sealed class ResourceManagementService(IFhirResourceClient fhirClient) : IResourceManagementService
 {
-    private readonly FhirJsonParser _parser = new();
-    private readonly FhirJsonSerializer _serializer = new(new SerializerSettings { Pretty = true });
+    private readonly FhirJsonDeserializer _jsonDeserializer = new();
 
     public async Task<ResourceSearchResultDto> SearchAsync(string resourceType, IReadOnlyDictionary<string, string?> parameters, CancellationToken cancellationToken)
     {
         var bundle = await fhirClient.SearchAsync(resourceType, parameters, cancellationToken);
-        return new ResourceSearchResultDto(resourceType, bundle.Total ?? bundle.Entry.Count, bundle.Entry.Select(ToSummary).ToArray(), _serializer.SerializeToString(bundle));
+        return new ResourceSearchResultDto(resourceType, bundle.Total ?? bundle.Entry.Count, bundle.Entry.Select(ToSummary).ToArray(), bundle.ToJson(pretty: true));
     }
 
     public async Task<ResourceReadResultDto> ReadAsync(string resourceType, string id, CancellationToken cancellationToken)
     {
         var resource = await fhirClient.ReadAsync(resourceType, id, cancellationToken) ?? throw new InvalidOperationException($"{resourceType}/{id} was not found.");
-        return new ResourceReadResultDto(resource.TypeName, resource.Id, _serializer.SerializeToString(resource));
+        return new ResourceReadResultDto(resource.TypeName, resource.Id, resource.ToJson(pretty: true));
     }
 
     public async Task<ResourceReadResultDto> CreateAsync(string resourceType, string payloadJson, CancellationToken cancellationToken)
     {
         var resource = Parse(resourceType, payloadJson);
         var created = await fhirClient.CreateRawAsync(resource, cancellationToken);
-        return new ResourceReadResultDto(created.TypeName, created.Id, _serializer.SerializeToString(created));
+        return new ResourceReadResultDto(created.TypeName, created.Id, created.ToJson(pretty: true));
     }
 
     public async Task<ResourceReadResultDto> UpdateAsync(string resourceType, string id, string payloadJson, CancellationToken cancellationToken)
@@ -42,12 +41,12 @@ public sealed class ResourceManagementService(IFhirResourceClient fhirClient) : 
         var resource = Parse(resourceType, payloadJson);
         resource.Id = id;
         var updated = await fhirClient.UpdateRawAsync(resourceType, id, resource, cancellationToken);
-        return new ResourceReadResultDto(updated.TypeName, updated.Id, _serializer.SerializeToString(updated));
+        return new ResourceReadResultDto(updated.TypeName, updated.Id, updated.ToJson(pretty: true));
     }
 
     private Resource Parse(string resourceType, string payloadJson)
     {
-        var resource = _parser.Parse<Resource>(payloadJson);
+        var resource = _jsonDeserializer.Deserialize<Resource>(payloadJson);
         if (!string.Equals(resource.TypeName, resourceType, StringComparison.OrdinalIgnoreCase)) throw new InvalidOperationException($"Expected {resourceType} but received {resource.TypeName}.");
         return resource;
     }

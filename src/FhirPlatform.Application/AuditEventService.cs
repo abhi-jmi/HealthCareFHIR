@@ -16,7 +16,7 @@ public sealed class AuditEventService(IFhirResourceClient fhirClient) : IAuditEv
         var auditEvent = new AuditEvent
         {
             Type = new Coding("http://terminology.hl7.org/CodeSystem/audit-event-type", request.EventType, request.EventType),
-            Recorded = new Instant(DateTimeOffset.UtcNow),
+            Recorded = DateTimeOffset.UtcNow,
             Agent = { new AuditEvent.AgentComponent { Requestor = false, Name = "FHIR Platform" } }
         };
         if (!string.IsNullOrWhiteSpace(request.EntityReference)) auditEvent.Entity.Add(new AuditEvent.EntityComponent { What = new ResourceReference(request.EntityReference), Description = request.Description });

@@ -3,13 +3,13 @@ using System.Text;
 using Hl7.Fhir.Model;
 using Hl7.Fhir.Serialization;
 using Microsoft.Extensions.Logging;
+using Task = System.Threading.Tasks.Task;
 
 namespace FhirPlatform.FhirClient;
 
 public sealed class MicrosoftFhirResourceClient(HttpClient httpClient, ILogger<MicrosoftFhirResourceClient> logger) : IFhirResourceClient
 {
-    private readonly FhirJsonParser _parser = new();
-    private readonly FhirJsonSerializer _serializer = new(new SerializerSettings { Pretty = false });
+    private readonly FhirJsonDeserializer _jsonDeserializer = new();
 
     public async Task<T?> ReadAsync<T>(string id, CancellationToken cancellationToken) where T : Resource, new() =>
         await SendAsync<T>(HttpMethod.Get, $"{new T().TypeName}/{Uri.EscapeDataString(id)}", null, cancellationToken);
@@ -79,17 +79,17 @@ public sealed class MicrosoftFhirResourceClient(HttpClient httpClient, ILogger<M
         using var request = new HttpRequestMessage(method, path);
         request.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("application/fhir+json"));
         request.Headers.TryAddWithoutValidation("X-Correlation-ID", Guid.NewGuid().ToString("n"));
-        if (body is not null) request.Content = new StringContent(_serializer.SerializeToString(body), Encoding.UTF8, "application/fhir+json");
+        if (body is not null) request.Content = new StringContent(body.ToJson(pretty: false), Encoding.UTF8, "application/fhir+json");
         using var response = await httpClient.SendAsync(request, cancellationToken);
         var payload = await response.Content.ReadAsStringAsync(cancellationToken);
         logger.LogInformation("FHIR {Method} {Path} returned {StatusCode}", method, path, (int)response.StatusCode);
         if (!response.IsSuccessStatusCode) throw new FhirOperationException(response.StatusCode, TryParseOutcome(payload));
-        return string.IsNullOrWhiteSpace(payload) ? null : _parser.Parse<T>(payload);
+        return string.IsNullOrWhiteSpace(payload) ? null : _jsonDeserializer.Deserialize<T>(payload);
     }
 
     private OperationOutcome? TryParseOutcome(string payload)
     {
-        try { return string.IsNullOrWhiteSpace(payload) ? null : _parser.Parse<OperationOutcome>(payload); }
+        try { return string.IsNullOrWhiteSpace(payload) ? null : _jsonDeserializer.Deserialize<OperationOutcome>(payload); }
         catch (Exception ex) { logger.LogWarning(ex, "Unable to parse OperationOutcome from failed FHIR response."); return null; }
     }
 }

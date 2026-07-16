@@ -14,10 +14,8 @@ public interface IResourceValidationService
 
 public sealed class ResourceValidationService(IFhirResourceClient fhirClient, IExtensionRegistryReader extensionRegistry) : IResourceValidationService
 {
-    private readonly FhirJsonParser _jsonParser = new();
+    private readonly FhirJsonDeserializer _jsonDeserializer = new();
     private readonly FhirXmlParser _xmlParser = new();
-    private readonly FhirJsonSerializer _jsonSerializer = new(new SerializerSettings { Pretty = true });
-    private readonly FhirXmlSerializer _xmlSerializer = new(new SerializerSettings { Pretty = true });
 
     public async Task<FhirValidationResponse> ValidateAsync(FhirValidationRequest request, CancellationToken cancellationToken)
     {
@@ -47,9 +45,9 @@ public sealed class ResourceValidationService(IFhirResourceClient fhirClient, IE
         return new FhirValidationResponse(
             errors.Count == 0,
             resource.TypeName,
-            _jsonSerializer.SerializeToString(resource),
-            _xmlSerializer.SerializeToString(resource),
-            _jsonSerializer.SerializeToString(outcome),
+            resource.ToJson(pretty: true),
+            resource.ToXml(pretty: true),
+            outcome.ToJson(pretty: true),
             errors.Distinct(StringComparer.OrdinalIgnoreCase).ToArray(),
             warnings.Distinct(StringComparer.OrdinalIgnoreCase).ToArray(),
             unknownExtensions);
@@ -57,7 +55,7 @@ public sealed class ResourceValidationService(IFhirResourceClient fhirClient, IE
 
     private Resource Parse(FhirValidationRequest request) => request.Format.Equals("xml", StringComparison.OrdinalIgnoreCase)
         ? _xmlParser.Parse<Resource>(request.Payload)
-        : _jsonParser.Parse<Resource>(request.Payload);
+        : _jsonDeserializer.Deserialize<Resource>(request.Payload);
 
     private async Task<IReadOnlyList<string>> FindUnknownExtensionsAsync(Resource resource, CancellationToken cancellationToken)
     {
