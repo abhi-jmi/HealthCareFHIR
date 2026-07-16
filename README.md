@@ -5,7 +5,7 @@ A phased, production-oriented FHIR R4 healthcare platform using Microsoft FHIR S
 ## Prerequisites
 
 - Docker and Docker Compose
-- Optional: .NET 9 SDK for host builds and tests
+- Optional: .NET 9 SDK for host builds
 
 ## Local startup
 
@@ -29,14 +29,6 @@ Keycloak local users include `admin`, `clinician`, and `auditor` with matching d
 ## Architecture
 
 See `docs/architecture.md`. The UI calls the custom API; the API uses `IFhirResourceClient`; all clinical data access goes through FHIR REST APIs. The application database stores only operational data.
-
-## Test commands
-
-```bash
-dotnet test
-```
-
-In this environment, the .NET SDK may not be installed on the host; Docker builds use SDK images.
 
 ## Production warnings
 
