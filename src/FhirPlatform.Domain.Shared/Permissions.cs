@@ -5,6 +5,8 @@ public static class Permissions
 {
     public const string PatientRead = "Patient.Read";
     public const string PatientWrite = "Patient.Write";
+    public const string AdministrationManage = "Administration.Manage";
+    public const string ClinicalWrite = "Clinical.Write";
     public const string ObservationRead = "Observation.Read";
     public const string ObservationWrite = "Observation.Write";
     public const string DiagnosticReportRead = "DiagnosticReport.Read";
@@ -12,6 +14,7 @@ public static class Permissions
     public const string MedicationRead = "Medication.Read";
     public const string MedicationWrite = "Medication.Write";
     public const string WorkflowManage = "Workflow.Manage";
+    public const string FinancialManage = "Financial.Manage";
     public const string TerminologyManage = "Terminology.Manage";
     public const string ConformanceManage = "Conformance.Manage";
     public const string AuditRead = "Audit.Read";
@@ -19,8 +22,9 @@ public static class Permissions
 
     public static readonly IReadOnlySet<string> All = new HashSet<string>(StringComparer.OrdinalIgnoreCase)
     {
-        PatientRead, PatientWrite, ObservationRead, ObservationWrite, DiagnosticReportRead, DiagnosticReportWrite,
-        MedicationRead, MedicationWrite, WorkflowManage, TerminologyManage, ConformanceManage, AuditRead,
+        PatientRead, PatientWrite, AdministrationManage, ClinicalWrite, ObservationRead, ObservationWrite,
+        DiagnosticReportRead, DiagnosticReportWrite, MedicationRead, MedicationWrite, WorkflowManage,
+        FinancialManage, TerminologyManage, ConformanceManage, AuditRead,
         ClinicalReasoningExecute
     };
 }

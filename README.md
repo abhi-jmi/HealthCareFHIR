@@ -44,8 +44,8 @@ Do not use local secrets, disabled FHIR auth, or development Keycloak passwords 
 
 - **Level 1 Foundation:** JSON/XML validation, OperationOutcome handling, datatype display components, extension registry, and recursive custom-extension checks.
 - **Level 2 Implementer support:** CapabilityStatement dashboard, terminology operations, OAuth/OIDC authorization policies, AuditEvent creation, and constrained API Explorer.
-- **Levels 3-4 resource workflows:** Patient-specific APIs plus generic resource management for administration, clinical, diagnostics, medications, workflow, and financial resources through the custom API layer.
-- **Level 5 clinical reasoning:** Deterministic versioned rule execution with GuidanceResponse output, rule execution audit records, and a prominent no-medical-advice safety boundary.
+- **Levels 3-4 resource workflows:** Patient-specific APIs plus generic resource management for administration, clinical, diagnostics, medications, workflow, and financial resources through the custom API layer. R4 coverage includes Immunization, PlanDefinition in workflow contexts, and CoverageEligibilityRequest/CoverageEligibilityResponse.
+- **Level 5 clinical reasoning:** Deterministic versioned rule execution with GuidanceResponse output, rule execution audit records, and a prominent no-medical-advice safety boundary. The catalog also marks the FHIR R5 Medication Definition area as upgrade-planning scope because this platform currently targets FHIR R4.
 
 Automated test projects are intentionally omitted per the latest request. Run `dotnet build FhirPlatform.sln` and `docker compose up --build` in a .NET 9/Docker environment before deployment.
 
@@ -66,6 +66,7 @@ For local schema visibility, the Infrastructure project includes EF Core models 
 
 - Typed workflow pages are available for Patient (`/patients`), Practitioner (`/practitioners`), Organization (`/organizations`), Location (`/locations`), Clinical (`/clinical`), Diagnostics (`/diagnostics`), Medications (`/medications`), Workflow (`/workflow`), Financial (`/financial`), and Clinical Reasoning (`/clinical-reasoning`).
 - API hardening includes secure headers, HTTPS redirection, configurable request-size limit, global rate limiting, OIDC/JWT policy authorization, and PHI-safe structured logging boundaries.
+- Generic resource create/update authorization is mapped by FHIR area instead of using one patient-write policy for every resource type.
 - Observability includes Serilog request logging, health endpoints, SQL/FHIR health checks, and OpenTelemetry tracing/metrics with OTLP export.
 - Complete fictional development seed data is provided at `seed/fhir/complete-development-seed-bundle.json` and includes the requested counts for patients, practitioners, organizations, locations, observations, diagnostic reports, conditions, allergies, medication requests, appointments, tasks, care plans, questionnaires, questionnaire responses, plan definitions, libraries, and measures.
 - Azure production infrastructure starts from `deploy/azure/main.bicep` for Container Apps, Azure SQL, Log Analytics, and Application Insights.

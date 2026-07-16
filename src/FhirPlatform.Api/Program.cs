@@ -65,6 +65,7 @@ builder.Services.AddAuthorization(options =>
 builder.Services.AddHealthChecks().AddSqlServer(builder.Configuration.GetConnectionString("ApplicationSql") ?? string.Empty, name: "application-sql").AddUrlGroup(new Uri(builder.Configuration["Fhir:BaseUrl"] + "/metadata"), name: "fhir-server");
 var app = builder.Build();
 app.UseExceptionHandler();
+if (!app.Environment.IsDevelopment()) { app.UseHsts(); }
 app.UseMiddleware<SecurityHeadersMiddleware>();
 app.UseRateLimiter();
 app.UseHttpsRedirection();

@@ -6,26 +6,189 @@
 <h2>FHIR API Explorer</h2>
 <p>The explorer is constrained to supported FHIR resource types and calls the custom API layer instead of accepting arbitrary external URLs.</p>
 <div class="row g-3">
-    <div class="col-md-3"><label class="form-label">Resource type</label><input class="form-control" @bind="_resourceType" /></div>
+    <div class="col-md-3">
+        <label class="form-label">Resource type</label>
+        <select class="form-select" @bind="_resourceType">
+            @foreach (var resourceType in SupportedResourceTypes)
+            {
+                <option value="@resourceType">@resourceType</option>
+            }
+        </select>
+    </div>
     <div class="col-md-3"><label class="form-label">Interaction</label><select class="form-select" @bind="_interaction"><option>search</option><option>read</option></select></div>
-    <div class="col-md-3"><label class="form-label">Id</label><input class="form-control" @bind="_id" /></div>
+    <div class="col-md-3"><label class="form-label">Id</label><input class="form-control" disabled="@IsSearch" @bind="_id" /></div>
     <div class="col-md-3"><label class="form-label">Format</label><select class="form-select" @bind="_format"><option>json</option><option>xml</option></select></div>
+    <div class="col-12">
+        <label class="form-label">Search parameters</label>
+        <textarea class="form-control font-monospace" rows="4" disabled="@IsRead" @bind="_parameterText"></textarea>
+        <div class="form-text">One key=value pair per line. The explorer keeps requests routed through the custom API layer.</div>
+    </div>
 </div>
-<button class="btn btn-primary mt-3" @onclick="SendAsync">Send</button>
+<div class="d-flex align-items-center gap-3 mt-3">
+    <button class="btn btn-primary" disabled="@_isSending" @onclick="SendAsync">@(_isSending ? "Sending..." : "Send")</button>
+    @if (!string.IsNullOrWhiteSpace(_error))
+    {
+        <span class="text-danger">@_error</span>
+    }
+</div>
+@if (_response is not null)
+{
+    <div class="alert alert-secondary mt-3 mb-3">
+        <strong>Status:</strong> @_response.StatusCode
+        <span class="ms-3"><strong>Resource:</strong> @_response.ResourceType</span>
+        <span class="ms-3"><strong>Interaction:</strong> @_response.Interaction</span>
+    </div>
+}
 @if (_response is not null)
 {
     <RawResourceViewer Title="FHIR response" Format="@_response.ContentType" Content="@_response.Body" />
 }
 @code {
+    private static readonly string[] SupportedResourceTypes =
+    [
+        "Account",
+        "ActivityDefinition",
+        "AllergyIntolerance",
+        "Appointment",
+        "AuditEvent",
+        "Binary",
+        "BodyStructure",
+        "Bundle",
+        "CapabilityStatement",
+        "CarePlan",
+        "CareTeam",
+        "ChargeItem",
+        "Claim",
+        "ClaimResponse",
+        "ClinicalImpression",
+        "CodeSystem",
+        "Communication",
+        "CommunicationRequest",
+        "CompartmentDefinition",
+        "Composition",
+        "ConceptMap",
+        "Condition",
+        "Consent",
+        "Coverage",
+        "CoverageEligibilityRequest",
+        "CoverageEligibilityResponse",
+        "DetectedIssue",
+        "Device",
+        "DiagnosticReport",
+        "DocumentReference",
+        "DomainResource",
+        "Encounter",
+        "Endpoint",
+        "EpisodeOfCare",
+        "Evidence",
+        "EvidenceVariable",
+        "ExplanationOfBenefit",
+        "FamilyMemberHistory",
+        "Flag",
+        "Goal",
+        "GuidanceResponse",
+        "HealthcareService",
+        "ImplementationGuide",
+        "ImagingStudy",
+        "Immunization",
+        "Invoice",
+        "Library",
+        "Location",
+        "Measure",
+        "MeasureReport",
+        "Medication",
+        "MedicationAdministration",
+        "MedicationDispense",
+        "MedicationRequest",
+        "MedicationStatement",
+        "MessageHeader",
+        "MolecularSequence",
+        "NamingSystem",
+        "Observation",
+        "OperationDefinition",
+        "OperationOutcome",
+        "Organization",
+        "Parameters",
+        "Patient",
+        "PaymentNotice",
+        "PaymentReconciliation",
+        "PlanDefinition",
+        "Practitioner",
+        "PractitionerRole",
+        "Procedure",
+        "Provenance",
+        "Questionnaire",
+        "QuestionnaireResponse",
+        "RelatedPerson",
+        "ResearchDefinition",
+        "ResearchElementDefinition",
+        "Resource",
+        "RiskAssessment",
+        "SearchParameter",
+        "ServiceRequest",
+        "Slot",
+        "Specimen",
+        "StructureDefinition",
+        "Subscription",
+        "Task",
+        "ValueSet"
+    ];
+
     private string _resourceType = "Patient";
     private string _interaction = "search";
     private string? _id;
     private string _format = "json";
+    private string _parameterText = "_count=10";
+    private bool _isSending;
+    private string? _error;
     private FhirExplorerResponse? _response;
+
+    private bool IsSearch => _interaction.Equals("search", StringComparison.OrdinalIgnoreCase);
+    private bool IsRead => _interaction.Equals("read", StringComparison.OrdinalIgnoreCase);
+
     private async Task SendAsync()
     {
-        var client = HttpClientFactory.CreateClient("Api");
-        var response = await client.PostAsJsonAsync("api/fhir-explorer/execute", new FhirExplorerRequest(_resourceType, _interaction, _id, new Dictionary<string, string?> { ["_count"] = "10" }, _format));
-        _response = response.IsSuccessStatusCode ? await response.Content.ReadFromJsonAsync<FhirExplorerResponse>() : new FhirExplorerResponse((int)response.StatusCode, _resourceType, _interaction, "text/plain", await response.Content.ReadAsStringAsync(), new Dictionary<string, string>());
+        _isSending = true;
+        _error = null;
+        _response = null;
+
+        try
+        {
+            var client = HttpClientFactory.CreateClient("Api");
+            var request = new FhirExplorerRequest(_resourceType, _interaction, _id, ParseParameters(), _format);
+            var response = await client.PostAsJsonAsync("api/fhir-explorer/execute", request);
+
+            if (response.IsSuccessStatusCode)
+            {
+                _response = await response.Content.ReadFromJsonAsync<FhirExplorerResponse>();
+                return;
+            }
+
+            _response = new FhirExplorerResponse(
+                (int)response.StatusCode,
+                _resourceType,
+                _interaction,
+                response.Content.Headers.ContentType?.MediaType ?? "text/plain",
+                await response.Content.ReadAsStringAsync(),
+                new Dictionary<string, string>());
+            _error = "The explorer request failed. Review the response body for details.";
+        }
+        catch (Exception ex)
+        {
+            _error = ex.Message;
+        }
+        finally
+        {
+            _isSending = false;
+        }
+    }
+
+    private IReadOnlyDictionary<string, string?> ParseParameters()
+    {
+        return _parameterText
+            .Split(Environment.NewLine, StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries)
+            .Select(line => line.Split('=', 2, StringSplitOptions.TrimEntries))
+            .Where(parts => parts.Length == 2 && !string.IsNullOrWhiteSpace(parts[0]))
+            .ToDictionary(parts => parts[0], parts => string.IsNullOrWhiteSpace(parts[1]) ? null : parts[1], StringComparer.OrdinalIgnoreCase);
     }
 }

@@ -6,12 +6,12 @@ public static class RolePermissionMap
     private static readonly IReadOnlyDictionary<string, string[]> Grants = new Dictionary<string, string[]>(StringComparer.OrdinalIgnoreCase)
     {
         [PlatformRoles.SystemAdministrator] = Permissions.All.ToArray(),
-        [PlatformRoles.FhirAdministrator] = [Permissions.PatientRead, Permissions.PatientWrite, Permissions.ConformanceManage, Permissions.TerminologyManage, Permissions.AuditRead],
-        [PlatformRoles.Clinician] = [Permissions.PatientRead, Permissions.PatientWrite, Permissions.ObservationRead, Permissions.ObservationWrite, Permissions.DiagnosticReportRead, Permissions.MedicationRead, Permissions.WorkflowManage],
+        [PlatformRoles.FhirAdministrator] = [Permissions.PatientRead, Permissions.PatientWrite, Permissions.AdministrationManage, Permissions.ClinicalWrite, Permissions.ObservationRead, Permissions.ObservationWrite, Permissions.DiagnosticReportRead, Permissions.DiagnosticReportWrite, Permissions.MedicationRead, Permissions.MedicationWrite, Permissions.WorkflowManage, Permissions.FinancialManage, Permissions.ConformanceManage, Permissions.TerminologyManage, Permissions.AuditRead],
+        [PlatformRoles.Clinician] = [Permissions.PatientRead, Permissions.PatientWrite, Permissions.ClinicalWrite, Permissions.ObservationRead, Permissions.ObservationWrite, Permissions.DiagnosticReportRead, Permissions.MedicationRead, Permissions.MedicationWrite, Permissions.WorkflowManage],
         [PlatformRoles.DiagnosticReviewer] = [Permissions.PatientRead, Permissions.ObservationRead, Permissions.DiagnosticReportRead, Permissions.DiagnosticReportWrite],
         [PlatformRoles.Patient] = [Permissions.PatientRead, Permissions.ObservationRead, Permissions.DiagnosticReportRead, Permissions.MedicationRead],
         [PlatformRoles.Auditor] = [Permissions.AuditRead],
-        [PlatformRoles.IntegrationClient] = [Permissions.PatientRead, Permissions.PatientWrite, Permissions.ObservationRead, Permissions.ObservationWrite, Permissions.DiagnosticReportRead, Permissions.DiagnosticReportWrite]
+        [PlatformRoles.IntegrationClient] = [Permissions.PatientRead, Permissions.PatientWrite, Permissions.AdministrationManage, Permissions.ClinicalWrite, Permissions.ObservationRead, Permissions.ObservationWrite, Permissions.DiagnosticReportRead, Permissions.DiagnosticReportWrite, Permissions.MedicationRead, Permissions.MedicationWrite, Permissions.WorkflowManage, Permissions.FinancialManage]
     };
 
     public static bool RoleHasPermission(string role, string permission) =>
