@@ -1,0 +1,10 @@
+@using Hl7.Fhir.Model
+@if (Reference is null)
+{
+    <span class="text-muted">No reference</span>
+}
+else
+{
+    <span><code>@Reference.Reference</code> @(Reference.Display is null ? null : $"— {Reference.Display}")</span>
+}
+@code { [Parameter] public ResourceReference? Reference { get; set; } }
