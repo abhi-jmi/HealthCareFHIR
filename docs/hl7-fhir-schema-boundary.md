@@ -20,3 +20,9 @@ HL7 FHIR defines the resource model and REST semantics; it does not define a por
 To inspect the actual Microsoft FHIR Server SQL schema after `docker compose up --build`, connect to the `fhir-sql` container and run `deploy/sql/002_verify_fhir_server_schema.sql`. Those tables are owned by Microsoft FHIR Server and must not be queried or modified by custom application code.
 
 The separate `application-sql` database is initialized from `deploy/sql/001_app_init.sql` and contains only non-clinical operational tables. This separation is intentional so the platform can later move from self-hosted Microsoft FHIR Server to Azure Health Data Services without rewriting business workflows around SQL internals.
+
+## Optional HL7 FHIR resource projection models
+
+The project also contains optional EF Core projection models for the FHIR resource types represented by the HL7 Level 1-5 catalog. These classes and `DbSet` properties exist so developers can see a table-shaped projection of the FHIR schema in the application project and database when requested. They are not the clinical source of truth and must not replace Microsoft FHIR Server persistence.
+
+The projection tables are created by `deploy/sql/003_hl7_fhir_projection_schema.sql` in the `FhirPlatform` operational database. Each table stores common FHIR metadata and raw JSON/XML payload columns so the platform can support reporting, local schema inspection, or controlled projections without querying Microsoft FHIR Server internals.

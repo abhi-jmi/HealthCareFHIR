@@ -56,3 +56,7 @@ The `/fhir-levels` UI route and `/api/fhir-levels` API expose the Level 1-5 map 
 ## Local database schemas
 
 `docker compose up --build` creates two SQL Server databases: `FHIR` on `fhir-sql` for Microsoft FHIR Server's own schema, and `FhirPlatform` on `application-sql` for operational platform metadata. Microsoft FHIR Server owns and migrates the FHIR schema; custom code must access those resources through FHIR REST APIs only. Use `deploy/sql/002_verify_fhir_server_schema.sql` to inspect the server-created FHIR tables locally.
+
+## Optional HL7 FHIR projection tables
+
+For local schema visibility, the Infrastructure project includes EF Core models and `DbSet` properties for the FHIR resource types in the Level 1-5 catalog. Docker Compose runs `deploy/sql/003_hl7_fhir_projection_schema.sql` after the operational database initialization so these optional projection tables are visible in `FhirPlatform`. Microsoft FHIR Server remains the canonical clinical database; these projection tables are not a replacement for FHIR REST persistence.

@@ -28,7 +28,7 @@ services:
     image: mcr.microsoft.com/mssql-tools
     depends_on: { application-sql: { condition: service_healthy } }
     volumes: [./deploy/sql:/sql:ro]
-    command: ["/bin/bash", "-c", "/opt/mssql-tools/bin/sqlcmd -S application-sql -U sa -P $$APP_SQL_PASSWORD -i /sql/001_app_init.sql"]
+    command: ["/bin/bash", "-c", "/opt/mssql-tools/bin/sqlcmd -S application-sql -U sa -P $$APP_SQL_PASSWORD -i /sql/001_app_init.sql && /opt/mssql-tools/bin/sqlcmd -S application-sql -U sa -P $$APP_SQL_PASSWORD -i /sql/003_hl7_fhir_projection_schema.sql"]
     environment: { APP_SQL_PASSWORD: "${APP_SQL_PASSWORD:-LocalDev!Passw0rd}" }
   keycloak-db:
     image: postgres:16

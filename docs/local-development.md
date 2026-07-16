@@ -45,3 +45,7 @@ Development passwords in `docker-compose.yml` are local-only defaults and must b
 `docker compose up --build` now runs `fhir-sql-init` to create the `FHIR` database before the Microsoft FHIR Server starts. Microsoft FHIR Server then creates and migrates its own SQL schema. To view those server-owned tables, run the verification SQL in `deploy/sql/002_verify_fhir_server_schema.sql` against the `fhir-sql` container after the FHIR server is healthy.
 
 The application database is initialized separately by `application-sql-init` using `deploy/sql/001_app_init.sql`; it intentionally contains only operational platform tables, not duplicated FHIR resource tables.
+
+## Optional HL7 FHIR projection tables
+
+The `application-sql-init` container also runs `deploy/sql/003_hl7_fhir_projection_schema.sql`. This creates optional `Hl7Fhir*` projection tables in the `FhirPlatform` database for the resource models represented in the HL7 Level 1-5 catalog. These tables are for local visibility and controlled projections only; canonical clinical data remains in the `FHIR` database owned by Microsoft FHIR Server.
