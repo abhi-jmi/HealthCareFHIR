@@ -1,0 +1,115 @@
+@using FhirPlatform.Application.Contracts
+@inject IHttpClientFactory HttpClientFactory
+
+<section class="mb-3">
+    <div class="d-flex justify-content-between align-items-start gap-3 flex-wrap">
+        <div>
+            <h1>@Title</h1>
+            <p class="text-muted">@Description</p>
+        </div>
+        <span class="badge bg-primary align-self-center">@ResourceType</span>
+    </div>
+</section>
+
+<ul class="nav nav-tabs mb-3" role="tablist">
+    @foreach (var tab in Tabs)
+    {
+        <li class="nav-item" role="presentation"><button class="nav-link @(tab == _activeTab ? "active" : null)" type="button" @onclick="() => _activeTab = tab">@tab</button></li>
+    }
+</ul>
+
+<div class="card mb-3"><div class="card-body">
+    <h2 class="h5">Search @ResourceType</h2>
+    <div class="row g-2">
+        @foreach (var filter in Filters)
+        {
+            <div class="col-md-3"><label class="form-label" for="@filter.Key">@filter.Label</label><input id="@filter.Key" class="form-control" @bind="_filters[filter.Key]" placeholder="@filter.Placeholder" /></div>
+        }
+        <div class="col-md-2 align-self-end"><button class="btn btn-primary w-100" @onclick="SearchAsync">Search</button></div>
+    </div>
+</div></div>
+
+@if (_activeTab == "Editor")
+{
+    <div class="card mb-3"><div class="card-body">
+        <h2 class="h5">Create or update @ResourceType JSON</h2>
+        <p class="small text-muted">Typed workflow fields above build safe searches; create/update accepts canonical FHIR JSON and routes through the custom API.</p>
+        <label class="form-label" for="resource-id">Logical id for update</label><input id="resource-id" class="form-control mb-2" @bind="_editId" />
+        <label class="form-label" for="payload">FHIR JSON payload</label><textarea id="payload" class="form-control font-monospace" rows="12" @bind="_payloadJson"></textarea>
+        <div class="mt-2 d-flex gap-2"><button class="btn btn-success" @onclick="CreateAsync">Create</button><button class="btn btn-warning" @onclick="UpdateAsync" disabled="@string.IsNullOrWhiteSpace(_editId)">Update</button></div>
+        @if (!string.IsNullOrWhiteSpace(_message)) { <div class="alert alert-info mt-3">@_message</div> }
+    </div></div>
+}
+else
+{
+    <div class="alert alert-secondary"><strong>@_activeTab</strong>: @WorkflowText</div>
+}
+
+@if (_result is not null)
+{
+    <div class="card"><div class="card-body">
+        <h2 class="h5">Results (@_result.Total)</h2>
+        <table class="table table-sm table-hover"><thead><tr><th>Id</th><th>Display</th><th>Status</th><th>Date</th><th>Subject/Patient</th><th></th></tr></thead><tbody>
+        @foreach (var item in _result.Entries)
+        {
+            <tr><td>@item.Id</td><td>@item.Display</td><td>@item.Status</td><td>@item.Date</td><td>@item.SubjectReference</td><td><button class="btn btn-sm btn-outline-secondary" @onclick="() => LoadAsync(item.Id)">Open</button></td></tr>
+        }
+        </tbody></table>
+        @if (_selected is not null) { <RawResourceViewer Title="Selected resource JSON" Content="_selected.RawJson" Format="json" /> }
+        <RawResourceViewer Title="Raw Bundle JSON" Content="_result.RawJson" Format="json" />
+    </div></div>
+}
+
+@code {
+    [Parameter, EditorRequired] public string ResourceType { get; set; } = "Patient";
+    [Parameter, EditorRequired] public string Title { get; set; } = "FHIR Resource";
+    [Parameter] public string Description { get; set; } = "Manage typed FHIR workflow through the custom API.";
+    [Parameter] public string WorkflowText { get; set; } = "Use the tabs and search filters to manage resource lifecycle, references, provenance, audit review, and raw resource inspection.";
+    [Parameter] public IReadOnlyList<string> Tabs { get; set; } = new[] { "Summary", "Editor", "History", "Provenance", "Audit" };
+    [Parameter] public IReadOnlyList<WorkflowFilter> Filters { get; set; } = new[] { new WorkflowFilter("name", "Name/text", "Search text") };
+    private readonly Dictionary<string, string?> _filters = new();
+    private string _activeTab = "Summary";
+    private string? _editId;
+    private string _payloadJson = "{\n  \"resourceType\": \"Patient\"\n}";
+    private string? _message;
+    private ResourceSearchResultDto? _result;
+    private ResourceReadResultDto? _selected;
+
+    protected override void OnParametersSet()
+    {
+        _activeTab = Tabs.FirstOrDefault() ?? "Summary";
+        foreach (var filter in Filters) _filters.TryAdd(filter.Key, null);
+        if (!_payloadJson.Contains($"\"resourceType\": \"{ResourceType}\"", StringComparison.Ordinal)) _payloadJson = $"{{\n  \"resourceType\": \"{ResourceType}\"\n}}";
+    }
+
+    private async Task SearchAsync()
+    {
+        var query = string.Join('&', _filters.Where(x => !string.IsNullOrWhiteSpace(x.Value)).Select(x => $"{Uri.EscapeDataString(x.Key)}={Uri.EscapeDataString(x.Value!)}"));
+        var url = $"api/resources/{Uri.EscapeDataString(ResourceType)}?_count=20" + (string.IsNullOrWhiteSpace(query) ? string.Empty : "&" + query);
+        _result = await HttpClientFactory.CreateClient("Api").GetFromJsonAsync<ResourceSearchResultDto>(url);
+    }
+
+    private async Task LoadAsync(string? id)
+    {
+        if (string.IsNullOrWhiteSpace(id)) return;
+        _selected = await HttpClientFactory.CreateClient("Api").GetFromJsonAsync<ResourceReadResultDto>($"api/resources/{Uri.EscapeDataString(ResourceType)}/{Uri.EscapeDataString(id)}");
+        _editId = id; _payloadJson = _selected?.RawJson ?? _payloadJson;
+    }
+
+    private async Task CreateAsync()
+    {
+        var response = await HttpClientFactory.CreateClient("Api").PostAsJsonAsync($"api/resources/{Uri.EscapeDataString(ResourceType)}", new ResourceUpsertRequest(_payloadJson));
+        _message = response.IsSuccessStatusCode ? "Resource created through custom API." : await response.Content.ReadAsStringAsync();
+        if (response.IsSuccessStatusCode) await SearchAsync();
+    }
+
+    private async Task UpdateAsync()
+    {
+        if (string.IsNullOrWhiteSpace(_editId)) return;
+        var response = await HttpClientFactory.CreateClient("Api").PutAsJsonAsync($"api/resources/{Uri.EscapeDataString(ResourceType)}/{Uri.EscapeDataString(_editId)}", new ResourceUpsertRequest(_payloadJson));
+        _message = response.IsSuccessStatusCode ? "Resource updated through custom API." : await response.Content.ReadAsStringAsync();
+        if (response.IsSuccessStatusCode) await SearchAsync();
+    }
+
+    public sealed record WorkflowFilter(string Key, string Label, string Placeholder);
+}

@@ -1,0 +1,47 @@
+@page "/fhir-levels"
+@using FhirPlatform.Application.Contracts
+@inject IHttpClientFactory HttpClientFactory
+<h1>FHIR R4 Levels</h1>
+<p class="lead">Implementation map for the major FHIR R4 levels shown on the HL7 specification home page. Clinical data remains in Microsoft FHIR Server using the HL7 FHIR resource model; the platform database stores operational metadata only.</p>
+@if (_catalog is null)
+{
+    <button class="btn btn-primary" @onclick="LoadAsync">Load FHIR level map</button>
+}
+else
+{
+    <div class="fhir-level-board border rounded p-3 bg-light">
+        @foreach (var level in _catalog.Levels)
+        {
+            <section class="mb-3">
+                <h2 class="h5">Level @level.Level <span class="fw-normal">@level.Description</span></h2>
+                <div class="row g-3">
+                    @foreach (var module in level.Modules)
+                    {
+                        <div class="col-md-@(level.Level == 1 || level.Level == 3 || level.Level == 5 ? 12 : 3)">
+                            <div class="card h-100 shadow-sm">
+                                <div class="card-header fw-semibold text-primary">@module.Title</div>
+                                <div class="card-body">
+                                    <p>@module.Summary</p>
+                                    <h3 class="h6">FHIR R4 resources</h3>
+                                    <p class="small">@string.Join(", ", module.ResourceTypes)</p>
+                                    <h3 class="h6">UI</h3>
+                                    @foreach (var route in module.UiRoutes.Take(6))
+                                    {
+                                        <a class="badge bg-secondary me-1 mb-1" href="@route">@route</a>
+                                    }
+                                    <h3 class="h6 mt-2">API</h3>
+                                    <p class="small font-monospace">@string.Join(" | ", module.ApiRoutes)</p>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </section>
+        }
+    </div>
+}
+@code {
+    private FhirLevelCatalogDto? _catalog;
+    protected override Task OnInitializedAsync() => LoadAsync();
+    private async Task LoadAsync() => _catalog = await HttpClientFactory.CreateClient("Api").GetFromJsonAsync<FhirLevelCatalogDto>("api/fhir-levels");
+}

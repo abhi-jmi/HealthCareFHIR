@@ -1,0 +1,66 @@
+services:
+  fhir-sql:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    environment: { ACCEPT_EULA: "Y", SA_PASSWORD: "${FHIR_SQL_PASSWORD:-LocalDev!Passw0rd}" }
+    healthcheck: { test: ["CMD-SHELL", "/opt/mssql-tools18/bin/sqlcmd -S localhost -U sa -P $$SA_PASSWORD -C -Q 'SELECT 1' || exit 1"], interval: 10s, timeout: 5s, retries: 20 }
+    volumes: [fhir-sql-data:/var/opt/mssql]
+  fhir-sql-init:
+    image: mcr.microsoft.com/mssql-tools
+    depends_on: { fhir-sql: { condition: service_healthy } }
+    volumes: [./deploy/sql:/sql:ro]
+    command: ["/bin/bash", "-c", "/opt/mssql-tools/bin/sqlcmd -S fhir-sql -U sa -P $$FHIR_SQL_PASSWORD -i /sql/000_fhir_database.sql"]
+    environment: { FHIR_SQL_PASSWORD: "${FHIR_SQL_PASSWORD:-LocalDev!Passw0rd}" }
+  fhir-server:
+    image: mcr.microsoft.com/healthcareapis/r4-fhir-server:latest
+    depends_on: { fhir-sql-init: { condition: service_completed_successfully } }
+    environment:
+      ASPNETCORE_URLS: http://+:8080
+      FHIRServer__Security__Enabled: "false"
+      SqlServer__ConnectionString: "Server=fhir-sql;Database=FHIR;User Id=sa;Password=${FHIR_SQL_PASSWORD:-LocalDev!Passw0rd};TrustServerCertificate=True"
+    ports: ["8080:8080"]
+    healthcheck: { test: ["CMD-SHELL", "curl -f http://localhost:8080/metadata || exit 1"], interval: 15s, timeout: 5s, retries: 30 }
+  application-sql:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    environment: { ACCEPT_EULA: "Y", SA_PASSWORD: "${APP_SQL_PASSWORD:-LocalDev!Passw0rd}" }
+    healthcheck: { test: ["CMD-SHELL", "/opt/mssql-tools18/bin/sqlcmd -S localhost -U sa -P $$SA_PASSWORD -C -Q 'SELECT 1' || exit 1"], interval: 10s, timeout: 5s, retries: 20 }
+    volumes: [application-sql-data:/var/opt/mssql]
+  application-sql-init:
+    image: mcr.microsoft.com/mssql-tools
+    depends_on: { application-sql: { condition: service_healthy } }
+    volumes: [./deploy/sql:/sql:ro]
+    command: ["/bin/bash", "-c", "/opt/mssql-tools/bin/sqlcmd -S application-sql -U sa -P $$APP_SQL_PASSWORD -i /sql/001_app_init.sql && /opt/mssql-tools/bin/sqlcmd -S application-sql -U sa -P $$APP_SQL_PASSWORD -i /sql/003_hl7_fhir_projection_schema.sql"]
+    environment: { APP_SQL_PASSWORD: "${APP_SQL_PASSWORD:-LocalDev!Passw0rd}" }
+  keycloak-db:
+    image: postgres:16
+    environment: { POSTGRES_DB: keycloak, POSTGRES_USER: keycloak, POSTGRES_PASSWORD: "${KEYCLOAK_DB_PASSWORD:-keycloak}" }
+    volumes: [keycloak-db-data:/var/lib/postgresql/data]
+  keycloak:
+    image: quay.io/keycloak/keycloak:25.0
+    command: ["start-dev", "--import-realm"]
+    environment: { KC_DB: postgres, KC_DB_URL: jdbc:postgresql://keycloak-db:5432/keycloak, KC_DB_USERNAME: keycloak, KC_DB_PASSWORD: "${KEYCLOAK_DB_PASSWORD:-keycloak}", KEYCLOAK_ADMIN: admin, KEYCLOAK_ADMIN_PASSWORD: "${KEYCLOAK_ADMIN_PASSWORD:-admin}" }
+    volumes: [./deploy/keycloak:/opt/keycloak/data/import]
+    depends_on: [keycloak-db]
+    ports: ["8081:8080"]
+  application-api:
+    build: { context: ., dockerfile: deploy/docker/api.Dockerfile }
+    environment:
+      ASPNETCORE_URLS: http://+:8080
+      ConnectionStrings__ApplicationSql: "Server=application-sql;Database=FhirPlatform;User Id=sa;Password=${APP_SQL_PASSWORD:-LocalDev!Passw0rd};TrustServerCertificate=True"
+      Fhir__BaseUrl: http://fhir-server:8080
+      Authentication__RequireHttpsMetadata: "false"
+      Authentication__JwtBearer__Authority: http://keycloak:8080/realms/fhir-platform
+      Authentication__JwtBearer__Audience: fhir-platform-api
+    depends_on: { application-sql-init: { condition: service_completed_successfully }, fhir-server: { condition: service_healthy }, keycloak: { condition: service_started } }
+    ports: ["5000:8080"]
+  application-web:
+    build: { context: ., dockerfile: deploy/docker/web.Dockerfile }
+    environment: { ASPNETCORE_URLS: http://+:8080, Api__BaseUrl: http://application-api:8080, Authentication__OpenIdConnect__Authority: http://keycloak:8080/realms/fhir-platform, Authentication__OpenIdConnect__ClientId: fhir-platform-web, Authentication__OpenIdConnect__RequireHttpsMetadata: "false" }
+    depends_on: [application-api]
+    ports: ["5001:8080"]
+  application-worker:
+    build: { context: ., dockerfile: deploy/docker/worker.Dockerfile }
+    depends_on: [application-api]
+  otel-collector:
+    image: otel/opentelemetry-collector:latest
+    profiles: ["observability"]
+volumes: { fhir-sql-data: {}, application-sql-data: {}, keycloak-db-data: {} }

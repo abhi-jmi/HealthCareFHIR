@@ -1,0 +1,6 @@
+@page "/patients"
+<TypedResourceWorkspace ResourceType="Patient" Title="Patient management" Description="Registration, advanced search, demographics, contacts, related persons, care-team references, timeline review, documents, consents, provenance, and audit history." Tabs="PatientTabs" Filters="PatientFilters" WorkflowText="Patient workflow tabs cover summary, demographics, identifiers, contacts, emergency contacts, related persons, linked records, merge review, timeline, and clinical record sections." />
+@code {
+    private static readonly string[] PatientTabs = ["Summary", "Demographics", "Identifiers", "Contacts", "Related Persons", "Timeline", "Clinical Tabs", "Editor", "Provenance", "Audit"];
+    private static readonly TypedResourceWorkspace.WorkflowFilter[] PatientFilters = [new("name", "Name", "family or given"), new("identifier", "Identifier", "MRN/system|value"), new("email", "Email", "email"), new("phone", "Phone", "phone"), new("birthdate", "Date of birth", "yyyy-mm-dd"), new("gender", "Gender", "male/female/other"), new("organization", "Organization", "Organization/id"), new("active", "Active", "true/false")];
+}

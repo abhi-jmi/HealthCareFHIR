@@ -1,0 +1,23 @@
+@page "/resources/{ResourceType}"
+@using FhirPlatform.Application.Contracts
+@inject IHttpClientFactory HttpClientFactory
+<h1>@ResourceType</h1>
+<p class="text-muted">FHIR resources are searched and managed through the custom API; the UI never calls the FHIR server directly.</p>
+<div class="row g-2 mb-3"><div class="col-md-4"><label class="form-label">Search text</label><input class="form-control" @bind="_query" /></div><div class="col-md-2 align-self-end"><button class="btn btn-primary" @onclick="SearchAsync">Search</button></div></div>
+@if (_result is not null)
+{
+    <p>Total: @_result.Total</p>
+    <table class="table table-sm"><thead><tr><th>Id</th><th>Display</th><th>Status</th><th>Date</th><th>Subject</th></tr></thead><tbody>@foreach (var item in _result.Entries) { <tr><td>@item.Id</td><td>@item.Display</td><td>@item.Status</td><td>@item.Date</td><td>@item.SubjectReference</td></tr> }</tbody></table>
+    <RawResourceViewer Title="Raw Bundle JSON" Content="_result.RawJson" Format="json" />
+}
+@code {
+    [Parameter] public string ResourceType { get; set; } = "Patient";
+    private string? _query;
+    private ResourceSearchResultDto? _result;
+    private async Task SearchAsync()
+    {
+        var client = HttpClientFactory.CreateClient("Api");
+        var url = $"api/resources/{Uri.EscapeDataString(ResourceType)}?_count=20" + (string.IsNullOrWhiteSpace(_query) ? string.Empty : $"&name={Uri.EscapeDataString(_query)}&_filter={Uri.EscapeDataString(_query)}");
+        _result = await client.GetFromJsonAsync<ResourceSearchResultDto>(url);
+    }
+}

@@ -1,0 +1,10 @@
+@using Hl7.Fhir.Model
+@if (Name is null)
+{
+    <span class="text-muted">No name</span>
+}
+else
+{
+    <span>@(Name.Text ?? string.Join(" ", Name.Prefix.Concat(Name.Given).Append(Name.Family).Concat(Name.Suffix).Where(p => !string.IsNullOrWhiteSpace(p))))</span>
+}
+@code { [Parameter] public HumanName? Name { get; set; } }
