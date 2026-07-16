@@ -15,6 +15,19 @@ public sealed class ValidationPageTests
         markup.Should().Contain("OperationOutcomePanel");
     }
 
+
+    [Fact]
+    public void Level1_display_components_cover_required_remaining_datatypes()
+    {
+        var root = FindRepositoryRoot();
+        var componentDirectory = Path.Combine(root, "src", "FhirPlatform.Web", "Components");
+        File.Exists(Path.Combine(componentDirectory, "PeriodDisplay.razor")).Should().BeTrue();
+        File.Exists(Path.Combine(componentDirectory, "AttachmentDisplay.razor")).Should().BeTrue();
+        File.Exists(Path.Combine(componentDirectory, "MetaDisplay.razor")).Should().BeTrue();
+        File.Exists(Path.Combine(componentDirectory, "ExtensionDisplay.razor")).Should().BeTrue();
+        File.Exists(Path.Combine(componentDirectory, "BundleViewer.razor")).Should().BeTrue();
+    }
+
     private static string FindRepositoryRoot()
     {
         var directory = new DirectoryInfo(AppContext.BaseDirectory);

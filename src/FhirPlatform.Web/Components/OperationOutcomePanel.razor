@@ -1,20 +1,28 @@
-<div class="alert alert-info" role="status">
+<div class="alert @(Errors.Count > 0 ? "alert-danger" : Warnings.Count > 0 ? "alert-warning" : "alert-info")" role="status">
     <h3 class="h6">OperationOutcome</h3>
-    @if (Issues.Count == 0)
+    @if (Errors.Count == 0 && Warnings.Count == 0 && Issues.Count == 0)
     {
         <p class="mb-0">No validation issues returned.</p>
     }
-    else
+    @if (Errors.Count > 0)
     {
-        <ul class="mb-0">
-            @foreach (var issue in Issues)
-            {
-                <li>@issue</li>
-            }
-        </ul>
+        <h4 class="h6">Errors</h4>
+        <ul>@foreach (var issue in Errors) { <li>@issue</li> }</ul>
+    }
+    @if (Warnings.Count > 0)
+    {
+        <h4 class="h6">Warnings</h4>
+        <ul>@foreach (var issue in Warnings) { <li>@issue</li> }</ul>
+    }
+    @if (Issues.Count > 0)
+    {
+        <h4 class="h6">Other issues</h4>
+        <ul>@foreach (var issue in Issues) { <li>@issue</li> }</ul>
     }
 </div>
 
 @code {
+    [Parameter] public IReadOnlyList<string> Errors { get; set; } = Array.Empty<string>();
+    [Parameter] public IReadOnlyList<string> Warnings { get; set; } = Array.Empty<string>();
     [Parameter] public IReadOnlyList<string> Issues { get; set; } = Array.Empty<string>();
 }

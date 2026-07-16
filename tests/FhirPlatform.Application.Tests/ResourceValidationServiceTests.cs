@@ -48,6 +48,17 @@ public sealed class ResourceValidationServiceTests
         response.UnknownExtensions.Should().Contain("https://example.org/fhir/StructureDefinition/custom");
     }
 
+
+    [Fact]
+    public async Task ValidateAsync_rejects_nested_unknown_custom_extensions()
+    {
+        var service = new ResourceValidationService(new ValidatingFhirClient(), new StaticExtensionRegistry(Array.Empty<string>()));
+        var payload = "{\"resourceType\":\"Patient\",\"contact\":[{\"relationship\":[{\"extension\":[{\"url\":\"https://example.org/fhir/StructureDefinition/nested\",\"valueString\":\"x\"}],\"text\":\"Emergency\"}]}]}";
+        var response = await service.ValidateAsync(new FhirValidationRequest(payload, "Patient", "json"), CancellationToken.None);
+        response.IsValid.Should().BeFalse();
+        response.UnknownExtensions.Should().Contain("https://example.org/fhir/StructureDefinition/nested");
+    }
+
     [Fact]
     public async Task ValidateAsync_allows_registered_custom_extensions()
     {

@@ -1,3 +1,5 @@
+using System.Collections;
+using System.Reflection;
 using FhirPlatform.Application.Contracts;
 using FhirPlatform.FhirClient;
 using Hl7.Fhir.Model;
@@ -59,18 +61,63 @@ public sealed class ResourceValidationService(IFhirResourceClient fhirClient, IE
 
     private async Task<IReadOnlyList<string>> FindUnknownExtensionsAsync(Resource resource, CancellationToken cancellationToken)
     {
-        IEnumerable<Extension> resourceExtensions = resource is DomainResource domainResource
-            ? domainResource.Extension
-            : Enumerable.Empty<Extension>();
-
-        if (!resourceExtensions.Any()) return Array.Empty<string>();
+        var extensionUrls = CollectExtensionUrls(resource);
+        if (extensionUrls.Count == 0) return Array.Empty<string>();
 
         var registeredUrls = await extensionRegistry.GetActiveCanonicalUrlsAsync(resource.TypeName, cancellationToken);
-        return resourceExtensions
-            .Select(extension => extension.Url)
-            .Where(url => !string.IsNullOrWhiteSpace(url) && IsCustomExtension(url!) && !registeredUrls.Contains(url!))
+        return extensionUrls
+            .Where(url => IsCustomExtension(url) && !registeredUrls.Contains(url))
             .Distinct(StringComparer.OrdinalIgnoreCase)
-            .ToArray()!;
+            .ToArray();
+    }
+
+    private static IReadOnlyList<string> CollectExtensionUrls(Resource resource)
+    {
+        var urls = new List<string>();
+        var visited = new HashSet<object>(ReferenceEqualityComparer.Instance);
+        Visit(resource, urls, visited);
+        return urls;
+    }
+
+    private static void Visit(object? node, List<string> urls, ISet<object> visited)
+    {
+        if (node is null || node is string || !visited.Add(node)) return;
+
+        if (node is Extension extension)
+        {
+            if (!string.IsNullOrWhiteSpace(extension.Url)) urls.Add(extension.Url!);
+            foreach (var child in extension.Extension) Visit(child, urls, visited);
+            Visit(extension.Value, urls, visited);
+            return;
+        }
+
+        if (node is DomainResource domainResource)
+        {
+            foreach (var extensionNode in domainResource.Extension) Visit(extensionNode, urls, visited);
+            foreach (var modifierExtension in domainResource.ModifierExtension) Visit(modifierExtension, urls, visited);
+        }
+        else if (node is BackboneElement backboneElement)
+        {
+            foreach (var extensionNode in backboneElement.Extension) Visit(extensionNode, urls, visited);
+            foreach (var modifierExtension in backboneElement.ModifierExtension) Visit(modifierExtension, urls, visited);
+        }
+        else if (node is Element element)
+        {
+            foreach (var extensionNode in element.Extension) Visit(extensionNode, urls, visited);
+        }
+
+        if (node is IEnumerable enumerable)
+        {
+            foreach (var item in enumerable) Visit(item, urls, visited);
+            return;
+        }
+
+        foreach (var property in node.GetType().GetProperties(BindingFlags.Instance | BindingFlags.Public))
+        {
+            if (property.GetIndexParameters().Length > 0 || property.Name is "Parent" or "Children" or "NamedChildren") continue;
+            if (!typeof(Base).IsAssignableFrom(property.PropertyType) && !typeof(IEnumerable).IsAssignableFrom(property.PropertyType)) continue;
+            Visit(property.GetValue(node), urls, visited);
+        }
     }
 
     private static bool IsCustomExtension(string url) =>
