@@ -18,8 +18,18 @@ builder.Services.AddOptions<FhirClientOptions>().Bind(builder.Configuration.GetS
 builder.Services.AddHttpClient<IFhirResourceClient, MicrosoftFhirResourceClient>((sp, client) => { var options = sp.GetRequiredService<IOptions<FhirClientOptions>>().Value; client.BaseAddress = new Uri(options.BaseUrl.TrimEnd('/') + "/"); client.Timeout = options.Timeout; });
 builder.Services.AddScoped<IPatientService, PatientService>();
 builder.Services.AddScoped<IConformanceService, ConformanceService>();
+builder.Services.AddScoped<IResourceValidationService, ResourceValidationService>();
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options => { builder.Configuration.GetSection("Authentication:JwtBearer").Bind(options); options.RequireHttpsMetadata = builder.Configuration.GetValue("Authentication:RequireHttpsMetadata", false); });
-builder.Services.AddAuthorization(options => { options.AddPolicy(Permissions.PatientRead, p => p.RequireClaim("permission", Permissions.PatientRead)); options.AddPolicy(Permissions.PatientWrite, p => p.RequireClaim("permission", Permissions.PatientWrite)); options.AddPolicy(Permissions.ConformanceManage, p => p.RequireRole(PlatformRoles.SystemAdministrator, PlatformRoles.FhirAdministrator)); });
+builder.Services.AddAuthorization(options =>
+{
+    foreach (var permission in Permissions.All)
+    {
+        options.AddPolicy(permission, policy => policy.RequireAssertion(context =>
+            context.User.HasClaim("permission", permission) ||
+            context.User.Claims.Where(c => c.Type.EndsWith("/claims/role", StringComparison.OrdinalIgnoreCase) || c.Type == "role" || c.Type == "roles")
+                .Any(role => RolePermissionMap.RoleHasPermission(role.Value, permission))));
+    }
+});
 builder.Services.AddHealthChecks().AddSqlServer(builder.Configuration.GetConnectionString("ApplicationSql") ?? string.Empty, name: "application-sql").AddUrlGroup(new Uri(builder.Configuration["Fhir:BaseUrl"] + "/metadata"), name: "fhir-server");
 var app = builder.Build();
 app.UseExceptionHandler();
