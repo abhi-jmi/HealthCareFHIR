@@ -1,0 +1,7 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <ItemGroup>
+    <ProjectReference Include="..\FhirPlatform.Application.Contracts\FhirPlatform.Application.Contracts.csproj" />
+    <ProjectReference Include="..\FhirPlatform.FhirClient\FhirPlatform.FhirClient.csproj" />
+    <PackageReference Include="Hl7.Fhir.R4" Version="6.0.1" />
+  </ItemGroup>
+</Project>

@@ -1,0 +1,11 @@
+@page "/validation"
+@using FhirPlatform.Web.Components
+
+<h2>FHIR Resource Validation</h2>
+<p class="text-muted">Administrators can validate FHIR JSON or XML through the custom API and inspect the returned OperationOutcome.</p>
+<label class="form-label" for="resource-type">Expected resource type</label><input id="resource-type" class="form-control" value="Patient" />
+<label class="form-label mt-3" for="format">Format</label><select id="format" class="form-select"><option>json</option><option>xml</option></select>
+<label class="form-label mt-3" for="payload">FHIR JSON or XML</label><textarea id="payload" class="form-control" rows="12"></textarea>
+<button class="btn btn-primary mt-3">Validate</button>
+<OperationOutcomePanel Issues="Array.Empty<string>()" />
+<RawResourceViewer Title="Formatted resource" Format="FHIR JSON" Content="Paste a resource and validate it to view formatted output." />
