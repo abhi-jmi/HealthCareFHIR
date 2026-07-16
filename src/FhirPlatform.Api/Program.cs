@@ -1,0 +1,34 @@
+using FhirPlatform.Application;
+using FhirPlatform.Domain.Shared;
+using FhirPlatform.FhirClient;
+using FhirPlatform.Infrastructure;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
+using Serilog;
+
+var builder = WebApplication.CreateBuilder(args);
+builder.Host.UseSerilog((context, configuration) => configuration.ReadFrom.Configuration(context.Configuration).WriteTo.Console());
+builder.Services.AddProblemDetails();
+builder.Services.AddControllers();
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
+builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("ApplicationSql")));
+builder.Services.AddOptions<FhirClientOptions>().Bind(builder.Configuration.GetSection(FhirClientOptions.SectionName)).ValidateDataAnnotations().ValidateOnStart();
+builder.Services.AddHttpClient<IFhirResourceClient, MicrosoftFhirResourceClient>((sp, client) => { var options = sp.GetRequiredService<IOptions<FhirClientOptions>>().Value; client.BaseAddress = new Uri(options.BaseUrl.TrimEnd('/') + "/"); client.Timeout = options.Timeout; });
+builder.Services.AddScoped<IPatientService, PatientService>();
+builder.Services.AddScoped<IConformanceService, ConformanceService>();
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options => { builder.Configuration.GetSection("Authentication:JwtBearer").Bind(options); options.RequireHttpsMetadata = builder.Configuration.GetValue("Authentication:RequireHttpsMetadata", false); });
+builder.Services.AddAuthorization(options => { options.AddPolicy(Permissions.PatientRead, p => p.RequireClaim("permission", Permissions.PatientRead)); options.AddPolicy(Permissions.PatientWrite, p => p.RequireClaim("permission", Permissions.PatientWrite)); options.AddPolicy(Permissions.ConformanceManage, p => p.RequireRole(PlatformRoles.SystemAdministrator, PlatformRoles.FhirAdministrator)); });
+builder.Services.AddHealthChecks().AddSqlServer(builder.Configuration.GetConnectionString("ApplicationSql") ?? string.Empty, name: "application-sql").AddUrlGroup(new Uri(builder.Configuration["Fhir:BaseUrl"] + "/metadata"), name: "fhir-server");
+var app = builder.Build();
+app.UseExceptionHandler();
+app.UseSerilogRequestLogging();
+app.UseSwagger();
+app.UseSwaggerUI();
+app.UseAuthentication();
+app.UseAuthorization();
+app.MapHealthChecks("/health"); app.MapHealthChecks("/health/live"); app.MapHealthChecks("/health/ready");
+app.MapControllers();
+app.Run();
+public partial class Program { }
