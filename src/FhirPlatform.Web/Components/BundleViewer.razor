@@ -1,0 +1,27 @@
+@using Hl7.Fhir.Model
+@if (Bundle is null)
+{
+    <p class="text-muted">No bundle</p>
+}
+else
+{
+    <div class="table-responsive">
+        <table class="table table-sm align-middle">
+            <thead><tr><th>#</th><th>Method</th><th>URL</th><th>Resource</th><th>Full URL</th></tr></thead>
+            <tbody>
+                @for (var index = 0; index < Bundle.Entry.Count; index++)
+                {
+                    var entry = Bundle.Entry[index];
+                    <tr>
+                        <td>@(index + 1)</td>
+                        <td>@entry.Request?.Method</td>
+                        <td><code>@entry.Request?.Url</code></td>
+                        <td>@entry.Resource?.TypeName/@entry.Resource?.Id</td>
+                        <td><code>@entry.FullUrl</code></td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+}
+@code { [Parameter] public Bundle? Bundle { get; set; } }

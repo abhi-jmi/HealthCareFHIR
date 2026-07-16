@@ -1,0 +1,10 @@
+@using Hl7.Fhir.Model
+@if (Period is null)
+{
+    <span class="text-muted">No period</span>
+}
+else
+{
+    <span>@(Period.Start ?? "open") → @(Period.End ?? "open")</span>
+}
+@code { [Parameter] public Period? Period { get; set; } }

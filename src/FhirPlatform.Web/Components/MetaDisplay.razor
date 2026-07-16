@@ -1,0 +1,16 @@
+@using Hl7.Fhir.Model
+@if (Meta is null)
+{
+    <span class="text-muted">No metadata</span>
+}
+else
+{
+    <dl class="row small mb-0">
+        <dt class="col-sm-3">Version</dt><dd class="col-sm-9">@Meta.VersionId</dd>
+        <dt class="col-sm-3">Last updated</dt><dd class="col-sm-9">@Meta.LastUpdated</dd>
+        <dt class="col-sm-3">Profiles</dt><dd class="col-sm-9">@string.Join(", ", Meta.Profile)</dd>
+        <dt class="col-sm-3">Tags</dt><dd class="col-sm-9">@string.Join(", ", Meta.Tag.Select(t => t.Display ?? t.Code))</dd>
+        <dt class="col-sm-3">Security</dt><dd class="col-sm-9">@string.Join(", ", Meta.Security.Select(s => s.Display ?? s.Code))</dd>
+    </dl>
+}
+@code { [Parameter] public Meta? Meta { get; set; } }
